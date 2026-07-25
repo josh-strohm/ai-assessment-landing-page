@@ -1,0 +1,1404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AI Tools Assessment: Reclaim 5-10 hours every week with off-the-shelf AI tools prescribed for your business. Guaranteed.">
+    <meta name="author" content="Josh Strohm">
+    <meta property="og:title" content="AI Tools Assessment: Reclaim 10 Hours a Week">
+    <meta property="og:description" content="Pick a time to book your AI Tools Assessment. We'll identify your biggest time drains and prescribe 3-7 off-the-shelf AI tools that save you 5-10 hours every week.">
+    <meta property="og:type" content="website">
+    <title>AI Tools Assessment: Reclaim Your Time</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg: #060608;
+            --bg-alt: #0a0b0f;
+            --surface: rgba(255, 255, 255, 0.03);
+            --surface-hover: rgba(255, 255, 255, 0.06);
+            --border: rgba(255, 255, 255, 0.08);
+            --border-hover: rgba(255, 255, 255, 0.15);
+            --text: #f0f0f4;
+            --text-muted: #8a8a96;
+            --text-dim: #5a5a66;
+            --accent: #06b6d4;
+            --accent-bright: #32E6E2;
+            --accent-glow: rgba(6, 182, 212, 0.35);
+            --accent2: #0891b2;
+            --accent3: #22d3ee;
+            --radius: 16px;
+            --radius-lg: 24px;
+            --radius-xl: 32px;
+            --transition: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            --max-width: 1200px;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* ===== ANIMATED BACKGROUND ===== */
+        .bg-gradient {
+            position: fixed;
+            inset: 0;
+            z-index: -2;
+            background: var(--bg);
+        }
+        .bg-gradient::before {
+            content: '';
+            position: absolute;
+            top: -10%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+            opacity: 0.5;
+            filter: blur(80px);
+            animation: drift 20s ease-in-out infinite;
+        }
+        .bg-gradient::after {
+            content: '';
+            position: absolute;
+            bottom: -10%;
+            right: 10%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(8, 145, 178, 0.12) 0%, transparent 70%);
+            filter: blur(80px);
+            animation: drift 25s ease-in-out infinite reverse;
+        }
+        @keyframes drift {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(50px); }
+        }
+
+        /* Noise overlay */
+        .noise {
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            opacity: 0.015;
+            pointer-events: none;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+        }
+
+        /* ===== NAVIGATION ===== */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: 20px 0;
+            transition: var(--transition);
+        }
+        nav.scrolled {
+            background: rgba(6, 6, 8, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: var(--border);
+            padding: 14px 0;
+        }
+        .nav-inner {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+            font-size: 18px;
+            letter-spacing: -0.02em;
+            text-decoration: none;
+            color: var(--text);
+        }
+        .logo-js {
+            font-size: 18px;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            color: var(--accent-bright);
+            text-decoration: none;
+        }
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            align-items: center;
+        }
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        .nav-links a:hover { color: var(--text); }
+        .nav-cta {
+            padding: 10px 20px;
+            border-radius: 100px;
+            background: var(--surface);
+            border: var(--border);
+            color: var(--text) !important;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+        .nav-cta:hover {
+            background: var(--surface-hover);
+            border-color: var(--border-hover);
+        }
+
+        /* ===== HERO ===== */
+        section {
+            position: relative;
+            padding: 120px 24px;
+        }
+        .container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+        }
+        #hero { padding-top: 180px; padding-bottom: 100px; }
+        .hero-inner {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            border-radius: 100px;
+            background: var(--surface);
+            border: var(--border);
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-muted);
+            margin-bottom: 32px;
+            opacity: 0;
+            animation: fadeUp 0.8s 0.1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        .hero-badge .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--accent3);
+            box-shadow: 0 0 12px var(--accent3);
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+        h1 {
+            font-size: clamp(48px, 8vw, 96px);
+            font-weight: 800;
+            line-height: 1.05;
+            letter-spacing: -0.04em;
+            max-width: 16ch;
+            margin-bottom: 28px;
+            opacity: 0;
+            animation: fadeUp 0.8s 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        h1 .gradient-text {
+            background: linear-gradient(135deg, var(--accent-bright) 0%, #0891b2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .hero-sub {
+            font-size: clamp(18px, 2.3vw, 24px);
+            color: var(--text-muted);
+            max-width: 620px;
+            margin-bottom: 40px;
+            font-weight: 400;
+            line-height: 1.5;
+            opacity: 0;
+            animation: fadeUp 0.8s 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        .hero-cta-row {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            justify-content: center;
+            opacity: 0;
+            animation: fadeUp 0.8s 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 16px 32px;
+            border-radius: 100px;
+            font-size: 16px;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            border: none;
+            transition: var(--transition);
+            white-space: nowrap;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent), #0e7490);
+            color: white;
+            box-shadow: 0 8px 32px var(--accent-glow);
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 40px var(--accent-glow);
+        }
+        .btn-secondary {
+            background: var(--surface);
+            color: var(--text);
+            border: var(--border);
+        }
+        .btn-secondary:hover {
+            background: var(--surface-hover);
+            border-color: var(--border-hover);
+        }
+
+        /* Hero guarantee bar */
+        .hero-guarantee {
+            margin-top: 72px;
+            display: flex;
+            gap: 48px;
+            flex-wrap: wrap;
+            justify-content: center;
+            opacity: 0;
+            animation: fadeUp 0.8s 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        .guarantee-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--text-muted);
+            font-size: 15px;
+            font-weight: 500;
+        }
+        .guarantee-item .icon {
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(34, 211, 238, 0.12);
+            color: var(--accent3);
+            font-size: 14px;
+        }
+
+        /* ===== SECTION HEADERS ===== */
+        .section-header {
+            text-align: center;
+            margin-bottom: 64px;
+        }
+        .section-tag {
+            display: inline-block;
+            padding: 6px 14px;
+            border-radius: 100px;
+            background: var(--surface);
+            border: var(--border);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--accent-bright);
+            margin-bottom: 20px;
+            letter-spacing: 0.05em;
+        }
+        h2 {
+            font-size: clamp(36px, 5vw, 56px);
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+            margin-bottom: 20px;
+        }
+        .section-sub {
+            font-size: 19px;
+            color: var(--text-muted);
+            max-width: 560px;
+            margin: 0 auto;
+            font-weight: 400;
+        }
+
+        /* ===== THE OFFER ===== */
+        #offer { padding-top: 80px; }
+        .offer-card {
+            max-width: 760px;
+            margin: 0 auto;
+            padding: 56px 48px;
+            background: var(--surface);
+            border: var(--border);
+            border-radius: var(--radius-xl);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .offer-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent-bright), transparent);
+        }
+        .offer-price {
+            font-size: 14px;
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 12px;
+        }
+        .offer-amount {
+            font-size: 72px;
+            font-weight: 800;
+            letter-spacing: -0.04em;
+            line-height: 1;
+            margin-bottom: 8px;
+            background: linear-gradient(135deg, var(--text) 30%, var(--accent-bright) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .offer-amount sup {
+            font-size: 32px;
+            font-weight: 600;
+            color: var(--text-dim);
+            -webkit-text-fill-color: var(--text-dim);
+            vertical-align: super;
+        }
+        .offer-title {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+        .offer-desc {
+            color: var(--text-muted);
+            font-size: 18px;
+            max-width: 540px;
+            margin: 0 auto 36px;
+            line-height: 1.6;
+        }
+        .offer-guarantee {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 28px;
+            border-radius: 100px;
+            background: rgba(34, 211, 238, 0.1);
+            border: 1px solid rgba(34, 211, 238, 0.2);
+            color: var(--accent3);
+            font-weight: 600;
+            font-size: 15px;
+            margin-bottom: 32px;
+        }
+        .offer-includes {
+            text-align: left;
+            display: grid;
+            gap: 16px;
+            max-width: 480px;
+            margin: 0 auto 36px;
+        }
+        .offer-include {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            font-size: 16px;
+            color: var(--text-muted);
+        }
+        .offer-include .check {
+            flex-shrink: 0;
+            width: 22px;
+            height: 22px;
+            border-radius: 6px;
+            background: rgba(6, 182, 212, 0.15);
+            color: var(--accent-bright);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            margin-top: 2px;
+        }
+        .offer-include strong { color: var(--text); font-weight: 600; }
+
+        /* ===== THE THREE LEVERS ===== */
+        #levers { padding-top: 40px; }
+        .levers-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+        .lever-card {
+            padding: 40px 32px;
+            background: var(--surface);
+            border: var(--border);
+            border-radius: var(--radius-lg);
+            text-align: center;
+            transition: var(--transition);
+        }
+        .lever-card:hover {
+            background: var(--surface-hover);
+            border-color: var(--border-hover);
+            transform: translateY(-4px);
+        }
+        .lever-icon {
+            width: 56px;
+            height: 56px;
+            margin: 0 auto 20px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+        }
+        .lever-card:nth-child(1) .lever-icon { background: rgba(6, 182, 212, 0.12); }
+        .lever-card:nth-child(2) .lever-icon { background: rgba(34, 211, 238, 0.12); }
+        .lever-card:nth-child(3) .lever-icon { background: rgba(8, 145, 178, 0.12); }
+        .lever-card h3 {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        .lever-card p {
+            color: var(--text-muted);
+            font-size: 15px;
+        }
+
+        /* ===== HOW IT WORKS ===== */
+        #how { padding-top: 40px; }
+        .phases {
+            display: grid;
+            gap: 0;
+            position: relative;
+        }
+        .phase {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+            align-items: center;
+            padding: 48px 0;
+            border-bottom: var(--border);
+        }
+        .phase:last-child { border-bottom: none; }
+        .phase:nth-child(even) .phase-content { order: 2; }
+        .phase-num {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--accent-bright);
+            letter-spacing: 0.1em;
+            margin-bottom: 12px;
+        }
+        .phase h3 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 14px;
+            letter-spacing: -0.02em;
+        }
+        .phase p {
+            color: var(--text-muted);
+            font-size: 17px;
+            margin-bottom: 20px;
+        }
+        .phase-list {
+            display: grid;
+            gap: 12px;
+        }
+        .phase-list-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            font-size: 15px;
+            color: var(--text-muted);
+        }
+        .phase-list-item .bullet {
+            flex-shrink: 0;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--accent);
+            margin-top: 8px;
+        }
+        .phase-visual {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .phase-card {
+            width: 100%;
+            max-width: 400px;
+            padding: 32px;
+            background: var(--surface);
+            border: var(--border);
+            border-radius: var(--radius-lg);
+        }
+        .phase-card .mock-line {
+            height: 10px;
+            border-radius: 4px;
+            background: var(--surface-hover);
+            margin-bottom: 10px;
+        }
+        .phase-card .mock-line.short { width: 60%; }
+        .phase-card .mock-line.medium { width: 80%; }
+        .phase-card .mock-line.accent { background: linear-gradient(90deg, var(--accent-bright), transparent); }
+        .phase-card .mock-ui {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 20px;
+            padding-bottom: 16px;
+            border-bottom: var(--border);
+        }
+        .phase-card .mock-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--text-dim);
+        }
+        .phase-card .mock-dot:nth-child(1) { background: #ff5f57; }
+        .phase-card .mock-dot:nth-child(2) { background: #ffbd2e; }
+        .phase-card .mock-dot:nth-child(3) { background: #28ca42; }
+        .phase-card .mock-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            color: var(--text-dim);
+            margin-left: 8px;
+        }
+        .phase-tag {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 6px;
+            background: rgba(6, 182, 212, 0.1);
+            color: var(--accent-bright);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            margin-bottom: 12px;
+        }
+
+        /* ===== GUARANTEE BANNER ===== */
+        #guarantee { padding-top: 40px; }
+        .guarantee-banner {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 64px 48px;
+            background: linear-gradient(135deg, rgba(34, 211, 238, 0.08), rgba(8, 145, 178, 0.05));
+            border: 1px solid rgba(34, 211, 238, 0.15);
+            border-radius: var(--radius-xl);
+            text-align: center;
+            position: relative;
+        }
+        .guarantee-banner .seal {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 24px;
+            border-radius: 50%;
+            background: rgba(34, 211, 238, 0.12);
+            border: 2px solid rgba(34, 211, 238, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+        }
+        .guarantee-banner h2 {
+            margin-bottom: 16px;
+        }
+        .guarantee-banner p {
+            font-size: 19px;
+            color: var(--text-muted);
+            max-width: 620px;
+            margin: 0 auto;
+        }
+        .guarantee-banner .money-back {
+            display: inline-block;
+            margin-top: 24px;
+            padding: 8px 20px;
+            border-radius: 100px;
+            background: rgba(34, 211, 238, 0.15);
+            color: var(--accent3);
+            font-weight: 700;
+            font-size: 16px;
+            letter-spacing: 0.02em;
+        }
+
+        /* ===== STATS ===== */
+        #stats { padding-top: 40px; padding-bottom: 80px; }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .stat {
+            text-align: center;
+            padding: 36px 16px;
+            background: var(--surface);
+            border: var(--border);
+            border-radius: var(--radius);
+            transition: var(--transition);
+        }
+        .stat:hover {
+            background: var(--surface-hover);
+            border-color: var(--border-hover);
+            transform: translateY(-4px);
+        }
+        .stat-num {
+            font-size: 44px;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            background: linear-gradient(135deg, var(--text) 40%, var(--accent-bright) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 6px;
+        }
+        .stat-label {
+            font-size: 14px;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        /* ===== WHAT YOU GET (Report breakdown) ===== */
+        #report { padding-top: 40px; }
+        .report-preview {
+            max-width: 600px;
+            margin: 0 auto 48px;
+            padding: 24px;
+            background: var(--surface);
+            border: var(--border);
+            border-radius: var(--radius-lg);
+        }
+        .report-slide {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 16px 12px;
+            border-bottom: var(--border);
+            transition: background 0.2s;
+        }
+        .report-slide:last-child { border-bottom: none; }
+        .report-slide:hover { background: var(--surface-hover); border-radius: 8px; }
+        .slide-num {
+            flex-shrink: 0;
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            background: rgba(6, 182, 212, 0.12);
+            color: var(--accent-bright);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13px;
+            font-weight: 600;
+        }
+        .slide-content { flex: 1; }
+        .slide-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+        .slide-desc {
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+
+        /* ===== WHAT'S NEXT (Upsells) ===== */
+        #next { padding-top: 40px; }
+        .upsell-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+        .upsell-card {
+            padding: 32px;
+            background: var(--surface);
+            border: var(--border);
+            border-radius: var(--radius-lg);
+            transition: var(--transition);
+        }
+        .upsell-card:hover {
+            background: var(--surface-hover);
+            border-color: var(--border-hover);
+            transform: translateY(-4px);
+        }
+        .upsell-card.featured {
+            grid-column: span 1;
+            background: linear-gradient(135deg, rgba(50, 230, 226, 0.08), rgba(8, 145, 178, 0.05));
+            border-color: rgba(50, 230, 226, 0.2);
+        }
+        .upsell-name {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        .upsell-price {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 14px;
+            color: var(--accent-bright);
+            margin-bottom: 14px;
+        }
+        .upsell-card p {
+            font-size: 15px;
+            color: var(--text-muted);
+        }
+
+        /* ===== FAQ ===== */
+        #faq { padding-top: 40px; padding-bottom: 60px; }
+        .faq-list {
+            max-width: 760px;
+            margin: 0 auto;
+            display: grid;
+            gap: 12px;
+        }
+        .faq-item {
+            padding: 24px 28px;
+            background: var(--surface);
+            border: var(--border);
+            border-radius: var(--radius);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .faq-item:hover {
+            background: var(--surface-hover);
+            border-color: var(--border-hover);
+        }
+        .faq-q {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 17px;
+            font-weight: 600;
+        }
+        .faq-q .arrow {
+            font-size: 14px;
+            color: var(--text-dim);
+            transition: transform 0.3s;
+        }
+        .faq-item.open .faq-q .arrow { transform: rotate(180deg); }
+        .faq-a {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            color: var(--text-muted);
+            font-size: 16px;
+            line-height: 1.7;
+        }
+        .faq-item.open .faq-a {
+            max-height: 300px;
+            padding-top: 16px;
+        }
+
+        /* ===== FINAL CTA ===== */
+        #final-cta {
+            text-align: center;
+            padding-top: 80px;
+            padding-bottom: 120px;
+        }
+        .final-cta-inner {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 64px 48px;
+            background: var(--surface);
+            border: var(--border);
+            border-radius: var(--radius-xl);
+            position: relative;
+            overflow: hidden;
+        }
+        .final-cta-inner::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+            opacity: 0.5;
+            filter: blur(60px);
+        }
+        .final-cta-inner h2 {
+            position: relative;
+            margin-bottom: 16px;
+        }
+        .final-cta-inner p {
+            position: relative;
+            font-size: 19px;
+            color: var(--text-muted);
+            margin-bottom: 32px;
+            max-width: 520px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .final-cta-inner .btn { position: relative; }
+        .final-cta-note {
+            position: relative;
+            margin-top: 20px;
+            font-size: 14px;
+            color: var(--text-dim);
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            padding: 40px 24px;
+            border-top: var(--border);
+            text-align: center;
+        }
+        .footer-inner {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+            text-align: center;
+        }
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+            font-size: 16px;
+            color: var(--text);
+        }
+        .footer-js {
+            font-size: 24px;
+            font-weight: 900;
+            letter-spacing: -0.04em;
+            color: var(--accent-bright);
+        }
+        .footer-info {
+            font-size: 14px;
+            color: var(--text-dim);
+        }
+        .footer-info a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .footer-info a:hover { color: var(--text); }
+
+        /* ===== ANIMATIONS ===== */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 900px) {
+            .levers-grid { grid-template-columns: 1fr; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .upsell-grid { grid-template-columns: 1fr; }
+            .upsell-card.featured { grid-column: auto; }
+            .phase { grid-template-columns: 1fr; gap: 24px; }
+            .phase:nth-child(even) .phase-content { order: 0; }
+            .phase-visual { order: -1; }
+            .nav-links { display: none; }
+        }
+        @media (max-width: 600px) {
+            section { padding: 80px 20px; }
+            .offer-card { padding: 40px 24px; }
+            .guarantee-banner { padding: 48px 24px; }
+            .final-cta-inner { padding: 48px 24px; }
+            .hero-guarantee { gap: 24px; }
+            .stats-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-gradient"></div>
+    <div class="noise"></div>
+
+    <!-- ===== NAV ===== -->
+    <nav id="nav">
+        <div class="nav-inner">
+            <a href="#" class="logo">
+                <span class="logo-js">AI Tools Assessment</span>
+            </a>
+            <div class="nav-links">
+                <a href="#offer">The Offer</a>
+                <a href="#how">How It Works</a>
+                <a href="#guarantee">Guarantee</a>
+                <a href="#faq">FAQ</a>
+                <a href="calendar.html" class="nav-cta">Book Assessment</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ===== HERO ===== -->
+    <section id="hero">
+        <div class="container">
+            <div class="hero-inner">
+                <div class="hero-badge">
+                    <span class="dot"></span>
+                    Only 5% of businesses use AI beyond ChatGPT. You're already behind.
+                </div>
+                <h1>
+                    Reclaim <span class="gradient-text">10 hours</span> a week with AI tools you've never heard of
+                </h1>
+                <p class="hero-sub">
+                    In 45 minutes, we sit down with you, find your biggest time drains, and prescribe 3-7 off-the-shelf AI tools that save you 5-10 hours every single week. No coding. No building. Just prescription-grade recommendations.
+                </p>
+                <div class="hero-cta-row">
+                    <a href="calendar.html" class="btn btn-primary">
+                        Book Your Assessment →
+                    </a>
+                    <a href="#how" class="btn btn-secondary">
+                        See How It Works
+                    </a>
+                </div>
+                <div class="hero-guarantee">
+                    <div class="guarantee-item"><span class="icon">✓</span> 45-minute session</div>
+                    <div class="guarantee-item"><span class="icon">✓</span> 3-7 tool prescriptions</div>
+                    <div class="guarantee-item"><span class="icon">✓</span> 5 hours/week guaranteed or money back</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== THE OFFER ===== -->
+    <section id="offer" class="reveal">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">THE OFFER</span>
+                <h2>AI Tools Assessment</h2>
+                <p class="section-sub">A structured 45-minute interview that uncovers your biggest bottlenecks, followed by a customized report prescribing off-the-shelf AI tools that fix them.</p>
+            </div>
+            <div class="offer-card">
+                <div class="offer-price">One-Time Investment</div>
+                <div class="offer-amount"><sup>$</sup>999</div>
+                <div class="offer-title">The AI Tools Assessment</div>
+                <p class="offer-desc">
+                    We meet you on Zoom for 45 minutes. We ask the right questions. We analyze. We prescribe. You save 5-10 hours every week.
+                </p>
+                <div class="offer-guarantee">
+                    <span>🛡️</span>
+                    If we can't find at least 5 hours/week in savings, you get 100% of your money back
+                </div>
+                <div class="offer-includes">
+                    <div class="offer-include"><span class="check">✓</span> <span><strong>45-minute structured interview</strong> to uncover your bottlenecks and time drains</span></div>
+                    <div class="offer-include"><span class="check">✓</span> <span><strong>AI-powered transcript analysis</strong> identifying pain points you may have missed</span></div>
+                    <div class="offer-include"><span class="check">✓</span> <span><strong>3-7 tool prescriptions</strong>: off-the-shelf SaaS and AI tools you can sign up for today</span></div>
+                    <div class="offer-include"><span class="check">✓</span> <span><strong>Effort vs. Impact matrix</strong> prioritizing quick wins that move the needle immediately</span></div>
+                    <div class="offer-include"><span class="check">✓</span> <span><strong>4-Day Quick Start Plan</strong>: 10 minutes/day to get the majority of the benefit</span></div>
+                    <div class="offer-include"><span class="check">✓</span> <span><strong>Financial impact analysis</strong> showing your exact monthly ROI in real dollars</span></div>
+                    <div class="offer-include"><span class="check">✓</span> <span><strong>30-minute review call</strong> walking you through every recommendation</span></div>
+                </div>
+                <a href="calendar.html" class="btn btn-primary">Book Your Assessment →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== THREE LEVERS ===== -->
+    <section id="levers" class="reveal">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">EVERY TOOL EARNS ITS PLACE</span>
+                <h2>Three Levers. Every Tool Pulls One.</h2>
+                <p class="section-sub">If a tool doesn't pull at least one of these levers, it doesn't go in your report.</p>
+            </div>
+            <div class="levers-grid">
+                <div class="lever-card">
+                    <div class="lever-icon">💰</div>
+                    <h3>Effectiveness</h3>
+                    <p>Makes your business more money: revenue-generating tools that directly impact the bottom line.</p>
+                </div>
+                <div class="lever-card">
+                    <div class="lever-icon">⏱️</div>
+                    <h3>Efficiency</h3>
+                    <p>Saves your business time: automations that eliminate repetitive work and reclaim hours every week.</p>
+                </div>
+                <div class="lever-card">
+                    <div class="lever-icon">✨</div>
+                    <h3>Quality</h3>
+                    <p>Increases the quality of your product or service: tools that elevate the experience you deliver.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== HOW IT WORKS ===== -->
+    <section id="how" class="reveal">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">THE PROCESS</span>
+                <h2>Four Phases. Zero Guesswork.</h2>
+                <p class="section-sub">A proven, repeatable system that takes you from "overwhelmed by AI" to "saving hours every week" in under a week.</p>
+            </div>
+            <div class="phases">
+                <!-- Phase 1 -->
+                <div class="phase">
+                    <div class="phase-content">
+                        <div class="phase-num">PHASE 01</div>
+                        <h3>The Discovery Call</h3>
+                        <p>We meet on Google Meet for 45 minutes. We record the call with an AI note-taker. We ask questions. We do NOT pitch anything.</p>
+                        <div class="phase-list">
+                            <div class="phase-list-item"><span class="bullet"></span> "Walk me through your day yesterday."</div>
+                            <div class="phase-list-item"><span class="bullet"></span> "What tasks do you dread doing?"</div>
+                            <div class="phase-list-item"><span class="bullet"></span> "Where does your work pile up?"</div>
+                            <div class="phase-list-item"><span class="bullet"></span> "If you could wave a magic wand and delete any process, what would it be?"</div>
+                        </div>
+                    </div>
+                    <div class="phase-visual">
+                        <div class="phase-card">
+                            <div class="mock-ui">
+                                <span class="mock-dot"></span><span class="mock-dot"></span><span class="mock-dot"></span>
+                                <span class="mock-label">Discovery Call: 45 min</span>
+                            </div>
+                            <div class="mock-line accent"></div>
+                            <div class="mock-line medium"></div>
+                            <div class="mock-line short"></div>
+                            <div class="mock-line medium"></div>
+                            <div class="mock-line short"></div>
+                            <div class="mock-line medium"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Phase 2 -->
+                <div class="phase">
+                    <div class="phase-content">
+                        <div class="phase-num">PHASE 02</div>
+                        <h3>AI Analysis</h3>
+                        <p>We feed the transcript into Claude with deep research capabilities. It finds pain points you didn't think were solvable and prescribes tools you've never heard of.</p>
+                        <div class="phase-list">
+                            <div class="phase-list-item"><span class="bullet"></span> Transcript → Claude → pattern recognition + tool research</div>
+                            <div class="phase-list-item"><span class="bullet"></span> We cross-reference against futurepedia.io and theresanaiforthat.com</div>
+                            <div class="phase-list-item"><span class="bullet"></span> Quality assurance: we review every recommendation for fit</div>
+                            <div class="phase-list-item"><span class="bullet"></span> No Salesforce for a 4-person landscaping business. We substitute smarter</div>
+                        </div>
+                    </div>
+                    <div class="phase-visual">
+                        <div class="phase-card">
+                            <span class="phase-tag">ANALYSIS OUTPUT</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Phase 3 -->
+                <div class="phase">
+                    <div class="phase-content">
+                        <div class="phase-num">PHASE 03</div>
+                        <h3>The Report</h3>
+                        <p>You receive a custom report built from a proven template, personalized to your business. Stupid simple. A confused mind doesn't implement.</p>
+                        <div class="phase-list">
+                            <div class="phase-list-item"><span class="bullet"></span> Executive summary with pain points and primary outcome</div>
+                            <div class="phase-list-item"><span class="bullet"></span> Effort vs. Impact matrix: quick wins in the top-left quadrant</div>
+                            <div class="phase-list-item"><span class="bullet"></span> Each tool: name, cost, setup time, hours saved per week</div>
+                            <div class="phase-list-item"><span class="bullet"></span> 4-Day Quick Start Plan: 10 minutes/day to see results</div>
+                            <div class="phase-list-item"><span class="bullet"></span> Financial impact slide: your exact monthly net ROI in dollars</div>
+                        </div>
+                    </div>
+                    <div class="phase-visual">
+                        <div class="phase-card">
+                            <span class="phase-tag">REPORT.pdf</span>
+                            <div class="mock-line accent"></div>
+                            <div class="mock-line medium"></div>
+                            <div class="mock-line short"></div>
+                            <div class="mock-line medium"></div>
+                            <div class="mock-line short"></div>
+                            <div class="mock-line medium"></div>
+                            <div class="mock-line accent" style="width:40%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Phase 4 -->
+                <div class="phase">
+                    <div class="phase-content">
+                        <div class="phase-num">PHASE 04</div>
+                        <h3>The Review Call</h3>
+                        <p>We email the report before the call, then walk through every recommendation together on Zoom for 30 minutes.</p>
+                        <div class="phase-list">
+                            <div class="phase-list-item"><span class="bullet"></span> "Which recommendation is most urgent for you?"</div>
+                            <div class="phase-list-item"><span class="bullet"></span> "Do you want to implement yourself, or want my help?"</div>
+                            <div class="phase-list-item"><span class="bullet"></span> "What's your timeline? Is this killing you, or can you wait 60 days?"</div>
+                        </div>
+                    </div>
+                    <div class="phase-visual">
+                        <div class="phase-card">
+                            <span class="phase-tag">REVIEW: 30 MIN</span>
+                            <div class="mock-line accent"></div>
+                            <div class="mock-line medium"></div>
+                            <div class="mock-line short"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== GUARANTEE ===== -->
+    <section id="guarantee" class="reveal">
+        <div class="container">
+            <div class="guarantee-banner">
+                <div class="seal">🛡️</div>
+                <h2>The Only Thing You Can Lose Is 45 Minutes</h2>
+                <p>If we can't find at least 5 hours per week in opportunity where AI can help your business, you get every dollar back. No questions. No friction. No risk.</p>
+                <div class="money-back">100% MONEY-BACK GUARANTEE</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== STATS ===== -->
+    <section id="stats" class="reveal">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat">
+                    <div class="stat-num">7hrs</div>
+                    <div class="stat-label">Average hours saved per week</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-num">$60</div>
+                    <div class="stat-label">Average monthly tool cost</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-num">50%</div>
+                    <div class="stat-label">Of clients want implementation help</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-num">$999</div>
+                    <div class="stat-label">Flat fee, no hidden costs</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== WHAT YOU GET ===== -->
+    <section id="report" class="reveal">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">YOUR DELIVERABLE</span>
+                <h2>A Report That Actually Gets Implemented</h2>
+                <p class="section-sub">Not a 40-page PDF that sits in a folder. A clear, stupid-simple report designed for action.</p>
+            </div>
+            <div class="report-preview">
+                <div class="report-slide">
+                    <span class="slide-num">01</span>
+                    <div class="slide-content">
+                        <div class="slide-title">Title Slide</div>
+                        <div class="slide-desc">Client name, date, business type, primary focus</div>
+                    </div>
+                </div>
+                <div class="report-slide">
+                    <span class="slide-num">02</span>
+                    <div class="slide-content">
+                        <div class="slide-title">Executive Summary</div>
+                        <div class="slide-desc">Main pain points, expected outcome, hours reclaimed each week</div>
+                    </div>
+                </div>
+                <div class="report-slide">
+                    <span class="slide-num">03</span>
+                    <div class="slide-content">
+                        <div class="slide-title">Effort vs. Impact Matrix</div>
+                        <div class="slide-desc">Visual prioritization: quick wins, major projects, fill-ins</div>
+                    </div>
+                </div>
+                <div class="report-slide">
+                    <span class="slide-num">04</span>
+                    <div class="slide-content">
+                        <div class="slide-title">Quick Wins Summary</div>
+                        <div class="slide-desc">One-liner pain point → the exact tool that solves it</div>
+                    </div>
+                </div>
+                <div class="report-slide">
+                    <span class="slide-num">05</span>
+                    <div class="slide-content">
+                        <div class="slide-title">Recommended Solutions</div>
+                        <div class="slide-desc">Each tool with cost, setup time, and weekly time saved</div>
+                    </div>
+                </div>
+                <div class="report-slide">
+                    <span class="slide-num">06</span>
+                    <div class="slide-content">
+                        <div class="slide-title">4-Day Quick Start Plan</div>
+                        <div class="slide-desc">10 minutes/day for 4 days = majority of the benefit activated</div>
+                    </div>
+                </div>
+                <div class="report-slide">
+                    <span class="slide-num">07</span>
+                    <div class="slide-content">
+                        <div class="slide-title">What Comes After Quick Wins</div>
+                        <div class="slide-desc">Bigger implementations for when you're ready to go further</div>
+                    </div>
+                </div>
+                <div class="report-slide">
+                    <span class="slide-num">08</span>
+                    <div class="slide-content">
+                        <div class="slide-title">Financial Impact</div>
+                        <div class="slide-desc">Your exact monthly net ROI quantified in real dollars</div>
+                    </div>
+                </div>
+                <div class="report-slide">
+                    <span class="slide-num">09</span>
+                    <div class="slide-content">
+                        <div class="slide-title">Next Steps</div>
+                        <div class="slide-desc">Implement the plan, book the review call</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== WHAT'S NEXT (Upsells) ===== -->
+    <section id="next" class="reveal">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">AFTER THE ASSESSMENT</span>
+                <h2>When You're Ready for More</h2>
+                <p class="section-sub">The assessment is the foot in the door. 50-60% of clients want implementation help. Here's what comes next, if you want it.</p>
+            </div>
+            <div class="upsell-grid">
+                <div class="upsell-card">
+                    <div class="upsell-name">Process Redesign</div>
+                    <div class="upsell-price">$3,000 – $3,500</div>
+                    <p>Before automating a broken process, we fix it. Current-state process map → future-state blueprint. If your workflow is 16 steps, we make it 7.</p>
+                </div>
+                <div class="upsell-card">
+                    <div class="upsell-name">Simple Automation</div>
+                    <div class="upsell-price">$1,500</div>
+                    <p>Zapier, Make.com, or n8n flows for cut-and-dry processes with 1-3 steps. Set up once, scale forever.</p>
+                </div>
+                <div class="upsell-card">
+                    <div class="upsell-name">Knowledge System</div>
+                    <div class="upsell-price">Custom Quote</div>
+                    <p>Custom AI trained on your business data. One broker got 400 emails per listing asking the same 5 questions. Now zero.</p>
+                </div>
+                <div class="upsell-card">
+                    <div class="upsell-name">Custom Workflows</div>
+                    <div class="upsell-price">From $3,000</div>
+                    <p>AI-powered skills built for your proprietary processes. Train your team. Optional maintenance retainer as your processes evolve.</p>
+                </div>
+                <div class="upsell-card">
+                    <div class="upsell-name">Full Implementation</div>
+                    <div class="upsell-price">From $8,000</div>
+                    <p>Any combination of process redesigns, custom skills, and automation builds. One package, total transformation.</p>
+                </div>
+                <div class="upsell-card featured">
+                    <div class="upsell-name">⭐ AI Concierge</div>
+                    <div class="upsell-price">$1,200 – $2,000/month</div>
+                    <p>Two 45-minute working sessions per month. We build AI skills together, live. Unlimited async access between calls. Audit → Optimize → Automate on every workflow. Effective rate: $1,000/hour.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FAQ ===== -->
+    <section id="faq" class="reveal">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">QUESTIONS</span>
+                <h2>Frequently Asked</h2>
+            </div>
+            <div class="faq-list">
+                <div class="faq-item">
+                    <div class="faq-q">Do I need to know anything about AI? <span class="arrow">▼</span></div>
+                    <div class="faq-a">No. You don't need to know how to use AI, how to code, or how to build anything. We prescribe off-the-shelf tools that already exist. You just sign up and start using them. Think of it like visiting a doctor: you describe your symptoms, they write the prescription.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-q">What if you can't find 5 hours of savings? <span class="arrow">▼</span></div>
+                    <div class="faq-a">You get 100% of your money back. No questions asked. The worst case for you is 45 minutes of your time. The best case is getting 5-10 hours back every single week, permanently.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-q">What kinds of tools do you prescribe? <span class="arrow">▼</span></div>
+                    <div class="faq-a">Some are AI tools, but many are just SaaS tools you didn't know existed. Sometimes the best solution is an AI-powered workflow or custom skill rather than an off-the-shelf product. Every recommendation is specific to your business, your pain points, and your budget.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-q">How much do the recommended tools cost? <span class="arrow">▼</span></div>
+                    <div class="faq-a">On average, about $60/month total for all recommended tools combined. When you're saving 7 hours a week and your time is worth hundreds per hour, that's a four-figure monthly ROI. Every month.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-q">What happens after the assessment? <span class="arrow">▼</span></div>
+                    <div class="faq-a">50-60% of clients want help implementing the recommendations. We offer process redesigns, automation builds, custom AI skills, knowledge systems, full implementation packages, and an AI Concierge retainer where we work with you live every month. Everything is optional. You can also implement everything yourself.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-q">What size business is this for? <span class="arrow">▼</span></div>
+                    <div class="faq-a">The sweet spot is 2-20 employees with $500K-$5M in annual revenue. If you're a solopreneur or a larger business, we can still help. Just reach out and we'll discuss.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FINAL CTA ===== -->
+    <section id="final-cta" class="reveal">
+        <div class="container">
+            <div class="final-cta-inner">
+                <h2>Stop Losing 10 Hours a Week</h2>
+                <p>Every week you wait is 10 hours of your life gone. The assessment takes 45 minutes. The tools take 10 minutes a day for 4 days to set up. The ROI is permanent.</p>
+                <a href="calendar.html" class="btn btn-primary" style="font-size: 18px; padding: 18px 40px;">
+                    Book Your $999 Assessment →
+                </a>
+                <div class="final-cta-note">45 minutes. 3-7 tools. 5+ hours back. Or your money back.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-info">
+                <a href="mailto:hi@joshstrohm.me">hi@joshstrohm.me</a> &nbsp;·&nbsp; (814) 931-3981 &nbsp;·&nbsp; © 2026 Josh Strohm
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Nav scroll effect
+        const nav = document.getElementById('nav');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 40) nav.classList.add('scrolled');
+            else nav.classList.remove('scrolled');
+        });
+
+        // Reveal on scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -80px 0px' });
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // FAQ accordion
+        document.querySelectorAll('.faq-item').forEach(item => {
+            item.addEventListener('click', () => {
+                const isOpen = item.classList.contains('open');
+                document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+                if (!isOpen) item.classList.add('open');
+            });
+        });
+    </script>
+</body>
+</html>
