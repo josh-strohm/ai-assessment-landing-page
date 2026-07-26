@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Book your AI Tools Assessment. Pick a time that works for you.">
-    <title>Book Your Assessment | AI Tools Assessment</title>
+    <meta name="description" content="Pick from a free 15-minute AI Mini Assessment or the full 45-minute $999 AI Tools Assessment. Both run on Google Meet.">
+    <title>Book Your Session | AI Tools Assessment</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -987,6 +987,81 @@
         .calendar-back a:hover {
             color: var(--text);
         }
+
+        /* ===== SESSION OPTIONS ===== */
+        .session-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            max-width: 1000px;
+            margin: 40px auto 0;
+        }
+        .option-card {
+            padding: 36px 32px;
+            background: var(--surface);
+            border: var(--border);
+            border-radius: var(--radius-lg);
+            text-align: left;
+        }
+        .option-card.featured {
+            background: linear-gradient(135deg, rgba(50, 230, 226, 0.08), rgba(8, 145, 178, 0.05));
+            border-color: rgba(50, 230, 226, 0.2);
+        }
+        .option-eyebrow {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13px;
+            color: var(--accent-bright);
+            letter-spacing: 0.06em;
+            margin-bottom: 8px;
+        }
+        .option-title {
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 12px;
+        }
+        .option-tagline {
+            color: var(--text-muted);
+            font-size: 16px;
+            line-height: 1.5;
+            margin-bottom: 24px;
+        }
+        .option-list {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 24px;
+        }
+        .option-list li {
+            padding-left: 28px;
+            position: relative;
+            margin-bottom: 14px;
+            color: var(--text-muted);
+            font-size: 15px;
+            line-height: 1.5;
+        }
+        .option-list li::before {
+            content: '\2713';
+            position: absolute;
+            left: 0;
+            top: 1px;
+            color: var(--accent3);
+            font-weight: 700;
+            font-size: 16px;
+        }
+        .option-bestfor {
+            border-top: 1px solid var(--border);
+            padding-top: 16px;
+            font-size: 14px;
+            color: var(--text-dim);
+            line-height: 1.5;
+        }
+        .option-bestfor strong {
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+        @media (max-width: 800px) {
+            .session-options { grid-template-columns: 1fr; }
+        }
     </style>
 </head>
 <body>
@@ -1013,7 +1088,35 @@
             <div class="calendar-header">
                 <span class="calendar-section-tag">BOOK YOUR SESSION</span>
                 <h2 class="calendar-title">Pick a Time That Works for You</h2>
-                <p class="calendar-sub">Pick the option that fits: a free 15-minute AI Mini Assessment to get started, or the full $999 AI Tools Assessment.</p>
+                <p class="calendar-sub">Two ways to start. Pick the option that fits where your business is today. Both sessions run on Google Meet.</p>
+            </div>
+
+            <div class="session-options">
+                <div class="option-card">
+                    <div class="option-eyebrow">15 MIN &middot; NO COST</div>
+                    <h3 class="option-title">Free AI Mini Assessment</h3>
+                    <p class="option-tagline">One bottleneck, one tool, no commitment.</p>
+                    <ul class="option-list">
+                        <li>A 15-minute call about how your business runs day to day</li>
+                        <li>I name your single biggest pain point</li>
+                        <li>I prescribe one specific tool you can sign up for today</li>
+                        <li>A 15-minute follow-up call to walk you through it and answer questions</li>
+                    </ul>
+                    <p class="option-bestfor"><strong>Best for:</strong> trying out the process and seeing one quick win before going bigger.</p>
+                </div>
+
+                <div class="option-card featured">
+                    <div class="option-eyebrow">45 MIN &middot; $999</div>
+                    <h3 class="option-title">AI Tools Assessment</h3>
+                    <p class="option-tagline">A full audit with 3 to 7 tools prescribed. Guaranteed to save 5+ hours a week, or your money back.</p>
+                    <ul class="option-list">
+                        <li>A 45-minute discovery call covering your full business</li>
+                        <li>I surface 3 to 7 pain points across effectiveness, efficiency, and quality</li>
+                        <li>A custom written report: each tool with cost, setup time, and hours saved</li>
+                        <li>A 30-minute review call to walk through every recommendation</li>
+                    </ul>
+                    <p class="option-bestfor"><strong>Best for:</strong> business owners ready to commit to a real AI roadmap for the entire operation.</p>
+                </div>
             </div>
             <div class="cal-embed">
                 <!-- Cal inline embed code begins -->
