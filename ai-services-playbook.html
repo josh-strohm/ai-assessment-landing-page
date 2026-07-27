@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AI Services Playbook — 30-Day Plan to $10K</title>
+<link rel="icon" type="image/png" href="ai-tools-assessment-logo.png" />
+<link rel="shortcut icon" type="image/png" href="ai-tools-assessment-logo.png" />
+<style>
+  :root{
+    --bg:#0b1220;
+    --panel:#101a2e;
+    --panel-2:#0f1a30;
+    --ink:#e6f1f5;
+    --muted:#8aa3b8;
+    --line:#1e2a44;
+    --teal:#2dd4bf;
+    --teal-dim:#0d9488;
+    --cyan:#22d3ee;
+    --blue:#0a66c2;
+    --amber:#fbbf24;
+    --green:#10b981;
+    --red:#ef4444;
+    --accent:#32e6e2;
+    --shadow:0 10px 30px rgba(0,0,0,.35);
+    --radius:14px;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.55}
+  a{color:var(--accent)}
+  .wrap{max-width:1180px;margin:0 auto;padding:28px 22px 80px}
+  header.hero{position:relative;background:linear-gradient(135deg,#0a1224 0%,#0e1c34 60%,#0a2540 100%);border:1px solid var(--line);border-radius:var(--radius);padding:28px 28px 24px;box-shadow:var(--shadow);overflow:hidden}
+  header.hero::after{content:"";position:absolute;inset:0;background:radial-gradient(800px 200px at 80% -10%,rgba(45,212,191,.18),transparent 60%),radial-gradient(600px 200px at 0% 110%,rgba(34,211,238,.12),transparent 60%);pointer-events:none}
+  .eyebrow{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);font-weight:700}
+  h1{margin:6px 0 4px;font-size:30px;letter-spacing:-.01em}
+  h1 .accent{color:var(--accent)}
+  .sub{color:var(--muted);max-width:780px}
+  .badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+  .badge{background:rgba(45,212,191,.08);border:1px solid rgba(45,212,191,.35);color:var(--teal);padding:5px 10px;border-radius:999px;font-size:12px;font-weight:600}
+  .badge.blue{background:rgba(10,102,194,.10);border-color:rgba(10,102,194,.45);color:#7fb3ff}
+  .badge.amber{background:rgba(251,191,36,.10);border-color:rgba(251,191,36,.45);color:#fcd34d}
+
+  .nav{display:flex;flex-wrap:wrap;gap:8px;margin:22px 0 18px}
+  .nav button{background:var(--panel);border:1px solid var(--line);color:var(--ink);padding:9px 14px;border-radius:10px;cursor:pointer;font-weight:600;font-size:13px;transition:.15s}
+  .nav button:hover{border-color:var(--teal);color:var(--teal)}
+  .nav button.active{background:linear-gradient(180deg,#0e3a3a,#0a2a2a);border-color:var(--teal);color:var(--teal);box-shadow:0 0 0 1px rgba(45,212,191,.3) inset}
+
+  .grid{display:grid;gap:16px}
+  .grid.cols-2{grid-template-columns:1fr 1fr}
+  .grid.cols-3{grid-template-columns:repeat(3,1fr)}
+  .grid.cols-4{grid-template-columns:repeat(4,1fr)}
+  @media (max-width:880px){.grid.cols-2,.grid.cols-3,.grid.cols-4{grid-template-columns:1fr}}
+
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:18px 18px;box-shadow:var(--shadow)}
+  .card h2{margin:0 0 6px;font-size:18px}
+  .card h3{margin:14px 0 8px;font-size:14px;color:var(--accent);letter-spacing:.04em;text-transform:uppercase}
+  .card p{margin:8px 0;color:#cdd9e5}
+  .card .desc{color:var(--muted);font-size:14px}
+
+  .section{display:none}
+  .section.active{display:block;animation:fade .25s ease}
+  @keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+
+  /* KPI strip */
+  .kpi{display:flex;justify-content:space-between;align-items:baseline;padding:10px 14px;background:var(--panel-2);border:1px solid var(--line);border-radius:10px}
+  .kpi .num{font-size:22px;font-weight:800;color:var(--accent)}
+  .kpi .lbl{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em}
+
+  /* Framework boxes */
+  .pillar{background:linear-gradient(180deg,#0f1c33,#0c172a);border:1px solid var(--line);border-radius:12px;padding:14px;text-align:center}
+  .pillar .big{font-size:34px;font-weight:800;color:var(--teal);line-height:1}
+  .pillar .name{margin-top:8px;font-weight:700}
+  .pillar .desc{font-size:12.5px;color:var(--muted);margin-top:4px}
+
+  /* Offer ladder */
+  .ladder{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;align-items:stretch}
+  @media (max-width:780px){.ladder{grid-template-columns:1fr}}
+  .rung{position:relative;background:var(--panel-2);border:1px solid var(--line);border-radius:12px;padding:14px}
+  .rung .price{font-size:24px;font-weight:800;color:var(--accent)}
+  .rung .arrow{position:absolute;right:-14px;top:50%;transform:translateY(-50%);color:var(--teal);font-size:24px}
+  @media (max-width:780px){.rung .arrow{display:none}}
+  .rung ul{margin:8px 0 0;padding-left:18px;font-size:13.5px;color:#cdd9e5}
+
+  /* Checklist */
+  details{border:1px solid var(--line);border-radius:12px;background:var(--panel-2);margin:8px 0;overflow:hidden}
+  details>summary{cursor:pointer;padding:12px 14px;font-weight:700;list-style:none;display:flex;align-items:center;gap:10px}
+  details>summary::before{content:"▸";color:var(--teal);transition:.2s;display:inline-block}
+  details[open]>summary::before{transform:rotate(90deg)}
+  details .body{padding:0 14px 14px 36px;border-top:1px dashed var(--line);margin-top:0}
+  details .body ul{padding-left:18px;margin:8px 0}
+
+  /* Checkboxes with progress */
+  .task{display:flex;align-items:flex-start;gap:10px;padding:8px 10px;border-radius:8px;margin:4px 0;background:rgba(255,255,255,.02);border:1px solid transparent;transition:.15s}
+  .task:hover{border-color:var(--line)}
+  .task input[type=checkbox]{appearance:none;-webkit-appearance:none;width:18px;height:18px;border-radius:5px;border:2px solid var(--line);background:var(--panel);cursor:pointer;display:inline-block;position:relative;flex-shrink:0;margin-top:2px}
+  .task input[type=checkbox]:checked{background:var(--teal);border-color:var(--teal)}
+  .task input[type=checkbox]:checked::after{content:"✓";position:absolute;inset:0;color:#04221e;font-weight:900;display:flex;align-items:center;justify-content:center;font-size:13px}
+  .task.done span{color:var(--muted);text-decoration:line-through}
+  .task label{cursor:pointer;flex:1;font-size:14px}
+
+  .progress{height:8px;background:var(--panel-2);border-radius:999px;overflow:hidden;border:1px solid var(--line);margin:8px 0 6px}
+  .progress > div{height:100%;background:linear-gradient(90deg,var(--teal),var(--cyan));width:0%;transition:.3s}
+  .progress-row{display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--muted);margin-bottom:14px}
+  .progress-row b{color:var(--accent)}
+
+  /* Week cards */
+  .week{border:1px solid var(--line);border-radius:12px;background:var(--panel-2);padding:14px;position:relative}
+  .week .head{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+  .week .head .pill{font-size:11px;padding:3px 8px;border-radius:999px;background:rgba(45,212,191,.1);color:var(--teal);border:1px solid rgba(45,212,191,.3);font-weight:700;text-transform:uppercase;letter-spacing:.08em}
+  .week .goal{color:var(--muted);font-size:13px;margin-bottom:10px}
+
+  /* Calculator */
+  .calc{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media (max-width:680px){.calc{grid-template-columns:1fr}}
+  .calc label{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;display:block;margin-bottom:6px}
+  .calc input,.calc select{width:100%;background:var(--panel-2);border:1px solid var(--line);color:var(--ink);padding:10px 12px;border-radius:8px;font-size:14px}
+  .calc input:focus,.calc select:focus{outline:none;border-color:var(--teal)}
+  .calc .out{background:linear-gradient(180deg,#0c2a2a,#082020);border:1px solid rgba(45,212,191,.4);padding:14px;border-radius:10px}
+  .calc .out .big{font-size:30px;font-weight:800;color:var(--accent)}
+  .calc .out .small{font-size:13px;color:var(--muted)}
+
+  /* Script cards */
+  .script{background:#0a1626;border:1px solid var(--line);border-left:3px solid var(--teal);border-radius:10px;padding:12px 14px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:13px;line-height:1.7;white-space:pre-wrap;color:#dbe7f0;position:relative}
+  .script .copy{position:absolute;top:8px;right:8px;background:var(--panel);border:1px solid var(--line);color:var(--ink);padding:4px 10px;border-radius:6px;font-size:11px;cursor:pointer}
+  .script .copy:hover{border-color:var(--teal);color:var(--teal)}
+
+  /* Tabs in scripts */
+  .tabs{display:flex;gap:6px;margin-bottom:10px;flex-wrap:wrap}
+  .tabs button{background:var(--panel-2);border:1px solid var(--line);color:var(--ink);padding:6px 12px;border-radius:8px;cursor:pointer;font-size:12.5px;font-weight:600}
+  .tabs button.active{background:var(--teal);color:#04221e;border-color:var(--teal)}
+  .tab-panel{display:none}
+  .tab-panel.active{display:block}
+
+  /* Tables */
+  table{width:100%;border-collapse:collapse;font-size:13.5px;margin-top:8px}
+  th,td{padding:8px 10px;text-align:left;border-bottom:1px solid var(--line)}
+  th{color:var(--accent);font-weight:700;font-size:12px;text-transform:uppercase;letter-spacing:.08em}
+
+  /* Sticky resource panel */
+  .resource{background:#0a1626;border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin:8px 0;font-size:13.5px}
+  .resource b{color:var(--accent)}
+
+  /* Toast */
+  .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--teal);color:#04221e;padding:10px 18px;border-radius:10px;font-weight:700;font-size:13px;box-shadow:var(--shadow);opacity:0;pointer-events:none;transition:.25s;z-index:99}
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+  .footer-note{margin-top:30px;padding:18px;border:1px dashed var(--line);border-radius:12px;color:var(--muted);font-size:13px}
+
+  .two{display:grid;grid-template-columns:1.2fr .8fr;gap:14px}
+  @media (max-width:880px){.two{grid-template-columns:1fr}}
+
+  .pill-row{display:flex;flex-wrap:wrap;gap:6px}
+  .pill{font-size:11px;padding:3px 8px;border-radius:999px;background:rgba(255,255,255,.04);border:1px solid var(--line);color:var(--muted)}
+
+  .obj{display:grid;grid-template-columns:1fr;gap:8px;margin-top:6px}
+  .obj-row{background:var(--panel-2);border:1px solid var(--line);border-radius:10px;padding:10px 12px}
+  .obj-row b{color:var(--accent)}
+  .obj-row .q{color:#cdd9e5}
+  .obj-row .a{color:var(--muted);font-size:13px;margin-top:4px}
+
+  /* Print-friendly */
+  @media print{
+    .nav,.toast,.copy,button{display:none!important}
+    .section{display:block!important}
+    body{background:#fff;color:#000}
+    .card,.details,.week,.rung,.pillar,.resource,.script,.kpi{background:#fff!important;border-color:#888!important;color:#000!important;box-shadow:none}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="hero">
+  <div class="eyebrow">AI Services Playbook · A to Z</div>
+  <h1>The <span class="accent">$10K in 30 Days</span> AI Concierge Business Plan</h1>
+  <p class="sub">An interactive breakdown of Corey Gannon's full playbook: the three-offer ladder, AOA framework, weekly roadmap, scripts, objection handlers, and a working pricing calculator. Built so you can check items off, track progress, and ship it.</p>
+  <div class="badges">
+    <span class="badge">Free Mini Assessment</span>
+    <span class="badge blue">$999 Paid Assessment</span>
+    <span class="badge amber">AI Concierge · Recurring</span>
+    <span class="badge">99.8% Net Margin</span>
+    <span class="badge blue">AOA Framework</span>
+  </div>
+</header>
+
+<nav class="nav" id="nav">
+  <button data-tab="overview" class="active">Overview</button>
+  <button data-tab="framework">Framework</button>
+  <button data-tab="mini">Mini Assessment</button>
+  <button data-tab="paid">Paid Assessment</button>
+  <button data-tab="concierge">AI Concierge</button>
+  <button data-tab="clients">Find Clients</button>
+  <button data-tab="objections">Objections</button>
+  <button data-tab="roadmap">30-Day Roadmap</button>
+  <button data-tab="calc">Pricing Calculator</button>
+  <button data-tab="resources">Resources</button>
+</nav>
+
+<!-- ============== OVERVIEW ============== -->
+<section class="section active" id="overview">
+  <div class="grid cols-4" style="margin-bottom:14px">
+    <div class="kpi"><div><div class="num">$999</div><div class="lbl">Paid Assessment</div></div></div>
+    <div class="kpi"><div><div class="num">$1K+</div><div class="lbl">Concierge / mo</div></div></div>
+    <div class="kpi"><div><div class="num">99.8%</div><div class="lbl">Net Margin</div></div></div>
+    <div class="kpi"><div><div class="num">30</div><div class="lbl">Days to $5–10K</div></div></div>
+  </div>
+
+  <div class="grid cols-2">
+    <div class="card">
+      <h2>The Three-Offer Ladder</h2>
+      <p class="desc">Each rung sells the next. The free assessment is the tripwire; the paid assessment is the sales call; the concierge is the recurring revenue engine.</p>
+      <div class="ladder" style="margin-top:10px">
+        <div class="rung">
+          <div class="pill-row"><span class="pill">Rung 1</span></div>
+          <div class="price">$0</div>
+          <strong>Free Mini Assessment</strong>
+          <ul>
+            <li>15-min call · 1 pain point · 1 tool</li>
+            <li>Tripwire to build trust</li>
+            <li>30–50% convert to paid</li>
+          </ul>
+        </div>
+        <div class="rung">
+          <div class="pill-row"><span class="pill">Rung 2</span></div>
+          <div class="price">$999</div>
+          <strong>Paid AI Assessment</strong>
+          <ul>
+            <li>45-min discovery · 3–7 tools</li>
+            <li>Industry-specific deep dive</li>
+            <li>Sets up concierge upsell</li>
+          </ul>
+          <div class="arrow">→</div>
+        </div>
+        <div class="rung">
+          <div class="pill-row"><span class="pill">Rung 3</span></div>
+          <div class="price">$1K+/mo</div>
+          <strong>AI Concierge</strong>
+          <ul>
+            <li>Bi-weekly 90-min strategy calls</li>
+            <li>Claude project + Notion hub</li>
+            <li>Recurring · high-touch · renews</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Foundation: AOA + 3 Levers of ROI</h2>
+      <p class="desc">Everything rests on two frameworks. If a tool doesn't pull a lever, skip it. If a process isn't audited + optimized, don't automate it.</p>
+      <h3>Three Levers of ROI</h3>
+      <div class="grid cols-3" style="gap:8px">
+        <div class="pillar"><div class="big">$</div><div class="name">Effectiveness</div><div class="desc">Makes you more money</div></div>
+        <div class="pillar"><div class="big">⏱</div><div class="name">Efficiency</div><div class="desc">Saves you time</div></div>
+        <div class="pillar"><div class="big">★</div><div class="name">Quality</div><div class="desc">Better product or experience</div></div>
+      </div>
+      <h3 style="margin-top:14px">AOA Framework</h3>
+      <div class="grid cols-3" style="gap:8px">
+        <div class="pillar"><div class="big">A</div><div class="name">Audit</div><div class="desc">Map the manual process end-to-end</div></div>
+        <div class="pillar"><div class="big">O</div><div class="name">Optimize</div><div class="desc">Cut the fat (15 steps → 8)</div></div>
+        <div class="pillar"><div class="big">A</div><div class="name">Automate</div><div class="desc">Claude skill, N8N, Zapier, etc.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:14px">
+    <h2>Why This Business Works</h2>
+    <p>Busy, successful business owners know they <em>need</em> AI but don't have the time to figure it out. They'll pay a premium to outsource the discovery, decision-making, and implementation — just like they outsource accounting, legal, and insurance. You're not selling software. You're selling <b>expertise, time-bought-back, and a competitive edge</b>.</p>
+  </div>
+</section>
+
+<!-- ============== FRAMEWORK ============== -->
+<section class="section" id="framework">
+  <div class="card">
+    <h2>Three Levers of ROI — Decision Filter</h2>
+    <p class="desc">Every recommendation must satisfy at least one. If a tool doesn't pull a lever, don't recommend it.</p>
+    <table>
+      <thead><tr><th>Lever</th><th>Question</th><th>Example Tool</th></tr></thead>
+      <tbody>
+        <tr><td>Effectiveness</td><td>Does it make the client more money?</td><td>AI lead-gen, upsell agents, smarter proposals</td></tr>
+        <tr><td>Efficiency</td><td>Does it save measurable time?</td><td>SaneBox (email), Claude Cowork, Claude skills</td></tr>
+        <tr><td>Quality</td><td>Does it improve product or CX?</td><td>AI QA, support summarization, content polish</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card" style="margin-top:14px">
+    <h2>AOA Framework — Process Transformation</h2>
+    <p class="desc">Never skip straight to "automate." Most clients want a 15-step process automated when really they should first cut it to 8.</p>
+    <div class="grid cols-3" style="gap:10px;margin-top:10px">
+      <div class="pillar"><div class="big">1</div><div class="name">Audit</div><div class="desc">Document how the work actually happens today, end-to-end. Inputs, outputs, decision points.</div></div>
+      <div class="pillar"><div class="big">2</div><div class="name">Optimize</div><div class="desc">Remove redundant steps. Merge, eliminate, simplify. Cut cycle time before adding tech.</div></div>
+      <div class="pillar"><div class="big">3</div><div class="name">Automate</div><div class="desc">Now turn the optimized process into a Claude skill, N8N flow, or Zapier automation.</div></div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:14px">
+    <h2>The Prescription Buckets</h2>
+    <p class="desc">After the magic wand question, route the pain point to one of these prescriptions.</p>
+    <table>
+      <thead><tr><th>Pain Type</th><th>Signal</th><th>Prescription</th></tr></thead>
+      <tbody>
+        <tr><td>High-frequency, high-friction</td><td>Universal problem (e.g., email)</td><td>Off-the-shelf tool (SaneBox, Futurepedia, TheresAnAIForThat)</td></tr>
+        <tr><td>Judgment-based task</td><td>Routes decisions / non-cut-and-dry</td><td>Claude Cowork with custom instructions</td></tr>
+        <tr><td>Proprietary workflow</td><td>Specific to their company</td><td>Custom Claude skill (run AOA first)</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ============== MINI ASSESSMENT ============== -->
+<section class="section" id="mini">
+  <div class="card">
+    <h2>Free Mini Assessment — The Tripwire</h2>
+    <p class="desc">A 15-minute call that uncovers one bottleneck and prescribes one tool. Converts 30–50% to the $999 paid assessment.</p>
+    <div class="progress-row">
+      <span>Progress</span><b id="mini-progress-label">0 / 0</b>
+    </div>
+    <div class="progress"><div id="mini-progress"></div></div>
+
+    <details open>
+      <summary>Pre-call — Send the text to 10 people</summary>
+      <div class="body">
+        <div class="task"><input type="checkbox" id="m1" /><label for="m1">Build a list of 10 small-business owners in your network (friends, gym, church, kids' parents)</label></div>
+        <div class="task"><input type="checkbox" id="m2" /><label for="m2">Send the outreach text below to all 10</label></div>
+        <div class="task"><input type="checkbox" id="m3" /><label for="m3">Aim for 6 responses and 3 booked meetings</label></div>
+        <div class="script" style="margin-top:8px"><button class="copy" data-copy="text1">Copy</button><b>Outreach Text Template:</b>
+"Hey [Name], it's [You]. I've recently gotten deep into the world of AI and I've been researching tools that are helping business owners save time and make more money.
+
+I'd love to sit down with you for 15 minutes to get a feel for how your business runs, then show you one simple AI tool you can implement right away — completely free, no strings attached.
+
+Worst case, you'll learn something. Best case, I'll show you a tool that changes how you work. Interested?"</div>
+      </div>
+    </details>
+
+    <details>
+      <summary>Meeting 1 (15 min) — Discovery + Magic Wand</summary>
+      <div class="body">
+        <div class="task"><input type="checkbox" id="m4" /><label for="m4">Ask: What repetitive tasks happen in your business daily?</label></div>
+        <div class="task"><input type="checkbox" id="m5" /><label for="m5">Ask: What friction points keep coming up?</label></div>
+        <div class="task"><input type="checkbox" id="m6" /><label for="m6">Ask: How much is your time worth per hour?</label></div>
+        <div class="task"><input type="checkbox" id="m7" /><label for="m7">Ask the Magic Wand question</label></div>
+        <div class="script"><button class="copy" data-copy="text2">Copy</button><b>Magic Wand question:</b>
+"If you could wave a magic wand and fix any one problem in your business, what would it be?"</div>
+        <p style="margin-top:8px"><b>Tip:</b> Email is the #1 answer. SaneBox is the most-prescribed tool.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>Research — Pick the right prescription bucket</summary>
+      <div class="body">
+        <div class="task"><input type="checkbox" id="m8" /><label for="m8">High-freq / high-friction → search Futurepedia.io or theresanaiforthat.com for off-the-shelf tools</label></div>
+        <div class="task"><input type="checkbox" id="m9" /><label for="m9">Judgment-based task → prescribe Claude Cowork with custom instructions</label></div>
+        <div class="task"><input type="checkbox" id="m10" /><label for="m10">Proprietary workflow → plan a Claude skill (run AOA first)</label></div>
+      </div>
+    </details>
+
+    <details>
+      <summary>Meeting 2 (15 min) — Deliver + Tee Up Upsell</summary>
+      <div class="body">
+        <div class="task"><input type="checkbox" id="m11" /><label for="m11">Restate their #1 pain point back to them</label></div>
+        <div class="task"><input type="checkbox" id="m12" /><label for="m12">Prescribe the tool: name, cost, first step</label></div>
+        <div class="task"><input type="checkbox" id="m13" /><label for="m13">Ask the upsell pivot question</label></div>
+        <div class="script"><button class="copy" data-copy="text3">Copy</button><b>Upsell Pivot:</b>
+"This is one tool you can implement yourself. I also offer a deeper $999 assessment where I prescribe 3–7 tools tailored to your entire business.
+
+Do you want to try this yourself, or would you like my help implementing it — and exploring what else I could find for you?"</div>
+        <p style="margin-top:8px"><b>Expected:</b> 50%+ want help or want to know what else is possible — that's your pitch for the paid assessment.</p>
+      </div>
+    </details>
+  </div>
+</section>
+
+<!-- ============== PAID ASSESSMENT ============== -->
+<section class="section" id="paid">
+  <div class="card">
+    <h2>$999 Paid AI Assessment</h2>
+    <p class="desc">A 45-minute industry-specific interview that surfaces 3–7 pain points and prescribes 3–7 off-the-shelf AI tools. The paid assessment <i>is</i> the sales call for the concierge.</p>
+
+    <div class="progress-row">
+      <span>Progress</span><b id="paid-progress-label">0 / 0</b>
+    </div>
+    <div class="progress"><div id="paid-progress"></div></div>
+
+    <details open>
+      <summary>45-Minute Discovery Call</summary>
+      <div class="body">
+        <div class="task"><input type="checkbox" id="p1" /><label for="p1">Go deeper than the mini — ask industry-specific workflow questions (15 min isn't enough for this)</label></div>
+        <div class="task"><input type="checkbox" id="p2" /><label for="p2">Identify 3–7 pain points across the three levers of ROI</label></div>
+        <div class="task"><input type="checkbox" id="p3" /><label for="p3">Quantify time/money impact where possible</label></div>
+        <div class="task"><input type="checkbox" id="p4" /><label for="p4">Identify which tools go in which bucket (off-the-shelf / Cowork / skill)</label></div>
+      </div>
+    </details>
+
+    <details>
+      <summary>Deliver the Assessment Report</summary>
+      <div class="body">
+        <div class="task"><input type="checkbox" id="p5" /><label for="p5">List 3–7 tools with cost + first-step instructions</label></div>
+        <div class="task"><input type="checkbox" id="p6" /><label for="p6">Map each tool to a Lever of ROI</label></div>
+        <div class="task"><input type="checkbox" id="p7" /><label for="p7">Schedule the Review/Close call</label></div>
+      </div>
+    </details>
+
+    <details>
+      <summary>Review Call — Pitch the Concierge</summary>
+      <div class="body">
+        <div class="task"><input type="checkbox" id="p8" /><label for="p8">Walk them through the report</label></div>
+        <div class="task"><input type="checkbox" id="p9" /><label for="p9">Transition: "Do you want help implementing these — and going further?"</label></div>
+        <div class="task"><input type="checkbox" id="p10" /><label for="p10">Quote your concierge price (start $1K/mo, raise on every yes)</label></div>
+        <div class="script"><button class="copy" data-copy="text4">Copy</button><b>Concierge Transition:</b>
+"Great — these are the tools. But the real question is: do you want my help implementing them, and continuing to find and build new AI leverage in your business every single month? That's what my AI Concierge engagement is — [price] a month."</div>
+      </div>
+    </details>
+
+    <div class="resource" style="margin-top:10px">
+      <b>Pro move:</b> Always raise your price every time you get a yes. First close: $1,200 → $1,500 → $1,800 → $2,000. Keep raising as long as they say yes.
+    </div>
+  </div>
+</section>
+
+<!-- ============== CONCIERGE ============== -->
+<section class="section" id="concierge">
+  <div class="card">
+    <h2>AI Concierge — The Recurring Engine</h2>
+    <p class="desc">High-touch, high-quality monthly engagement. Bi-weekly 90-min strategy calls, Claude project per client, Notion hub as the source of truth, four automation skills that run post-call.</p>
+
+    <div class="progress-row">
+      <span>Progress</span><b id="con-progress-label">0 / 0</b>
+    </div>
+    <div class="progress"><div id="con-progress"></div></div>
+
+    <div class="two">
+      <div>
+        <details open>
+          <summary>1 · Onboarding — Jotform Intake</summary>
+          <div class="body">
+            <div class="task"><input type="checkbox" id="c1" /><label for="c1">Send the Jotform intake to the client</label></div>
+            <div class="task"><input type="checkbox" id="c2" /><label for="c2"><b>Rule:</b> If the form isn't filled out, you don't do the first call</label></div>
+            <div class="task"><input type="checkbox" id="c3" /><label for="c3">Capture: industry jargon, time sinks, goals, tool stack, references, focus areas</label></div>
+          </div>
+        </details>
+
+        <details>
+          <summary>2 · Bootstrap the Claude Project</summary>
+          <div class="body">
+            <div class="task"><input type="checkbox" id="c4" /><label for="c4">Run the <b>intake-to-project-files</b> skill — turns Jotform answers into 6 context files</label></div>
+            <div class="task"><input type="checkbox" id="c5" /><label for="c5">Files created: process inventory, client profile, time syncs, goals, tool stack, glossary</label></div>
+            <div class="task"><input type="checkbox" id="c6" /><label for="c6">Write the project instructions that tie the files together</label></div>
+            <div class="task"><input type="checkbox" id="c7" /><label for="c7">One Claude project per client — full context preserved</label></div>
+          </div>
+        </details>
+
+        <details>
+          <summary>3 · Set Up the Notion Client Hub</summary>
+          <div class="body">
+            <div class="task"><input type="checkbox" id="c8" /><label for="c8">Quick links: Voxer, calendar booking, email</label></div>
+            <div class="task"><input type="checkbox" id="c9" /><label for="c9">Engagement overview: start date, cadence, primary contact, focus areas</label></div>
+            <div class="task"><input type="checkbox" id="c10" /><label for="c10">Open action items (rolling list)</label></div>
+            <div class="task"><input type="checkbox" id="c11" /><label for="c11">Call log: newest first, per-call section with date, duration, recording, recap, 3 takeaways, action items, skills/tools built</label></div>
+            <div class="resource"><b>Why this matters:</b> The "skills/tools built" list is the renewal engine — it shows the client exactly what they're paying for.</div>
+          </div>
+        </details>
+      </div>
+
+      <div>
+        <details open>
+          <summary>4 · Cadence — Bi-weekly Strategy Calls</summary>
+          <div class="body">
+            <div class="task"><input type="checkbox" id="c12" /><label for="c12">90 minutes every 2 weeks, recorded via Fathom</label></div>
+            <div class="task"><input type="checkbox" id="c13" /><label for="c13">Use Fathom AI notetaker for the recap</label></div>
+            <div class="task"><input type="checkbox" id="c14" /><label for="c14">Decide what to build on each call</label></div>
+          </div>
+        </details>
+
+        <details>
+          <summary>5 · Post-Call Automation (4 skills)</summary>
+          <div class="body">
+            <div class="task"><input type="checkbox" id="c15" /><label for="c15"><b>ai-concierge-call-update</b> — pulls transcript → fills Notion hub (top 3 takeaways, action items, tools built)</label></div>
+            <div class="task"><input type="checkbox" id="c16" /><label for="c16"><b>ai-concierge-follow-up-email</b> — drafts crisp 3-bullet wrap-up email + Notion link</label></div>
+            <div class="task"><input type="checkbox" id="c17" /><label for="c17"><b>ai-concierge-post-call</b> (orchestrator) — chains the two above back-to-back</label></div>
+            <div class="task"><input type="checkbox" id="c18" /><label for="c18">Total post-call time: &lt; 5 minutes, then done until the next call</label></div>
+            <div class="resource"><b>Why this matters:</b> The follow-up email is a retainer renewal mechanism. Crisp bullet points framed as outcomes make the client feel value → they keep paying.</div>
+          </div>
+        </details>
+
+        <details>
+          <summary>6 · Client Comms Between Calls</summary>
+          <div class="body">
+            <div class="task"><input type="checkbox" id="c19" /><label for="c19">Voxer for quick async questions</label></div>
+            <div class="task"><input type="checkbox" id="c20" /><label for="c20">Email for anything outside Voxer</label></div>
+            <div class="task"><input type="checkbox" id="c21" /><label for="c21">Onboard them into Claude Cowork with the project + a walkthrough plugin</label></div>
+          </div>
+        </details>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== CLIENTS ============== -->
+<section class="section" id="clients">
+  <div class="card">
+    <h2>4 Ways to Find Clients (No Audience Required)</h2>
+    <p class="desc">These all work this week, no followers or money needed.</p>
+
+    <div class="grid cols-2">
+      <div>
+        <h3>① Warm Network Mini Assessments</h3>
+        <p>Send the outreach text to 10 small-business owners you know. Expect 6 replies, 3 bookings, 1–2 paid conversions.</p>
+        <p style="color:var(--muted);font-size:13px"><b>Conversion math:</b> 10 texts → 6 replies → 3 bookings → 1 paid ($999) → 1 concierge ($1K+/mo).</p>
+      </div>
+      <div>
+        <h3>② Local AI for Business Meetup</h3>
+        <p>Partner with a co-working space. 90-min event: 30 networking → 30 demo on Claude Cowork → 30 networking. Promote in local Facebook groups. Text attendees 24h later with the free mini offer.</p>
+        <p style="color:var(--muted);font-size:13px"><b>Why it works:</b> Compounds. By month 3–6 you're the "AI guy" in town.</p>
+      </div>
+      <div>
+        <h3>③ Door Knock / Lead Magnet</h3>
+        <p>Target mom-and-pop service businesses with strong Google reviews but weak web presence. Walk in, ask for the owner, offer the free mini on the spot.</p>
+        <p style="color:var(--muted);font-size:13px"><b>Why it works:</b> Fastest path to a client this week. One founder closed his first paid assessment from a single door knock + coffee.</p>
+      </div>
+      <div>
+        <h3>④ Partnership Marketing</h3>
+        <p>Approach accountants, insurance agents, realtors, chamber of commerce. Offer to (a) take their overflow AI questions, or (b) co-host a free AI workshop for their clients.</p>
+        <p style="color:var(--muted);font-size:13px"><b>Why it works:</b> Their clients are your ideal clients. Make them look smart by having an AI resource to point to.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:14px">
+    <h2>The Economics</h2>
+    <div class="grid cols-3">
+      <div class="kpi"><div><div class="num">$20</div><div class="lbl">Claude sub</div></div></div>
+      <div class="kpi"><div><div class="num">$999</div><div class="lbl">Per assessment</div></div></div>
+      <div class="kpi"><div><div class="num">$1–2K</div><div class="lbl">Concierge / mo</div></div></div>
+    </div>
+    <p style="margin-top:10px">99.8% net margin. Only cost is a $20/mo Claude subscription. Done right, the assessment pays for itself on close #1, and every concierge month is nearly all profit.</p>
+    <div class="resource"><b>Free work isn't free.</b> Do your first 1–3 assessments in exchange for testimonials + case studies → most convert to concierge or further paid work. Treat free work as pipeline.</div>
+  </div>
+</section>
+
+<!-- ============== OBJECTIONS ============== -->
+<section class="section" id="objections">
+  <div class="card">
+    <h2>Top Objections & How to Handle Them</h2>
+    <p class="desc">Have these responses ready. Click "Copy" to grab any rebuttal.</p>
+
+    <div class="obj">
+      <div class="obj-row">
+        <b>"Can't I just use Claude or ChatGPT myself?"</b>
+        <div class="q">The most common objection — feels like it should be free.</div>
+        <div class="a">"Sure — and I could do my own taxes. I could write my own insurance. But I'm not a CPA, and I'm not an insurance agent. Wouldn't it make more sense to hire someone whose full-time job is staying on top of this stuff, rather than spending your own time and money figuring it out via trial and error?"</div>
+        <button class="copy" data-copy="obj1" style="margin-top:6px">Copy rebuttal</button>
+      </div>
+
+      <div class="obj-row">
+        <b>"I don't have time to learn this right now."</b>
+        <div class="q">The irony objection — busy people need this most.</div>
+        <div class="a">"That's all the more reason. The whole point of AI is to make you money, save you time, and improve quality. You can't afford <i>not</i> to do this. Every day you wait, your competitors are pulling ahead. Let's at least do the free 15-minute assessment so you can see where the leverage is."</div>
+        <button class="copy" data-copy="obj2" style="margin-top:6px">Copy rebuttal</button>
+      </div>
+
+      <div class="obj-row">
+        <b>"Let me think about it" / "Let me talk to my partner."</b>
+        <div class="q">The stalling objection.</div>
+        <div class="a">"I get it — it's a real decision. But every week you wait is another chunk of time spent doing things AI could be doing for you. The cost of getting started is small. The cost of doing nothing? Nothing changes — and your competitors keep moving."</div>
+        <button class="copy" data-copy="obj3" style="margin-top:6px">Copy rebuttal</button>
+      </div>
+    </div>
+
+    <div class="resource" style="margin-top:14px"><b>Full 8-objection playbook</b> is a separate free Notion doc Corey mentions in the video. Treat this as the top 3 to memorize cold.</div>
+  </div>
+</section>
+
+<!-- ============== ROADMAP ============== -->
+<section class="section" id="roadmap">
+  <div class="card">
+    <h2>30-Day Implementation Roadmap</h2>
+    <p class="desc">Check items off as you ship them. Your progress is saved in this browser.</p>
+
+    <div class="progress-row">
+      <span>Overall progress</span><b id="road-progress-label">0 / 0</b>
+    </div>
+    <div class="progress"><div id="road-progress"></div></div>
+    <button onclick="resetRoad()" style="margin:6px 0 14px;background:var(--panel-2);border:1px solid var(--line);color:var(--muted);padding:6px 10px;border-radius:8px;cursor:pointer;font-size:12px">Reset all checkboxes</button>
+
+    <div class="grid cols-4">
+      <div class="week">
+        <div class="head"><strong>Week 1</strong><span class="pill">Book</span></div>
+        <div class="goal"><b>Goal:</b> Book 3 free mini assessments.</div>
+        <div class="task"><input type="checkbox" id="w1" /><label for="w1">Make a list of 10 small-business owners</label></div>
+        <div class="task"><input type="checkbox" id="w2" /><label for="w2">Send the outreach text to all 10</label></div>
+        <div class="task"><input type="checkbox" id="w3" /><label for="w3">Get 6 replies, book 3 meetings</label></div>
+        <div class="task"><input type="checkbox" id="w4" /><label for="w4">Send second wave of 10 if needed</label></div>
+        <div class="task"><input type="checkbox" id="w5" /><label for="w5">Create your AI Operator landing doc / Notion workspace</label></div>
+      </div>
+
+      <div class="week">
+        <div class="head"><strong>Week 2</strong><span class="pill">Mini</span></div>
+        <div class="goal"><b>Goal:</b> Run the 3 free assessments + pitch the paid.</div>
+        <div class="task"><input type="checkbox" id="w6" /><label for="w6">Run Meeting 1 with each prospect (15 min)</label></div>
+        <div class="task"><input type="checkbox" id="w7" /><label for="w7">Research + pick the right prescription per pain point</label></div>
+        <div class="task"><input type="checkbox" id="w8" /><label for="w8">Run Meeting 2 — deliver + upsell</label></div>
+        <div class="task"><input type="checkbox" id="w9" /><label for="w9">Close at least 1 → $999 paid assessment</label></div>
+      </div>
+
+      <div class="week">
+        <div class="head"><strong>Week 3</strong><span class="pill">Paid</span></div>
+        <div class="goal"><b>Goal:</b> Run the $999 paid assessment.</div>
+        <div class="task"><input type="checkbox" id="w10" /><label for="w10">Run 45-min discovery + identify 3–7 pain points</label></div>
+        <div class="task"><input type="checkbox" id="w11" /><label for="w11">Build the assessment report (3–7 tools)</label></div>
+        <div class="task"><input type="checkbox" id="w12" /><label for="w12">Deliver in review call</label></div>
+        <div class="task"><input type="checkbox" id="w13" /><label for="w13">Pitch the AI Concierge ($1K+/mo)</label></div>
+      </div>
+
+      <div class="week">
+        <div class="head"><strong>Week 4</strong><span class="pill">Scale</span></div>
+        <div class="goal"><b>Goal:</b> First concierge close + plant meetup seeds.</div>
+        <div class="task"><input type="checkbox" id="w14" /><label for="w14">Close at least 1 concierge ($1K/mo MRR)</label></div>
+        <div class="task"><input type="checkbox" id="w15" /><label for="w15">Set up Claude project + Notion hub for that client</label></div>
+        <div class="task"><input type="checkbox" id="w16" /><label for="w16">Book first bi-weekly strategy call</label></div>
+        <div class="task"><input type="checkbox" id="w17" /><label for="w17">Plan first local AI meetup (co-working space + Facebook promo)</label></div>
+        <div class="task"><input type="checkbox" id="w18" /><label for="w18">Identify 2 partnership targets (CPA, insurance, realtor)</label></div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:14px;background:#0a1626">
+      <h3>After 30 Days</h3>
+      <p>You should have:</p>
+      <ul>
+        <li>1+ concierge client at $1K–$2K/mo</li>
+        <li>Testimonials + case studies from paid work</li>
+        <li>A scheduled (or upcoming) first local meetup</li>
+        <li>2–3 partnership conversations in progress</li>
+        <li>The free mini running on autopilot from inbound referrals</li>
+      </ul>
+      <p style="color:var(--accent);font-weight:700">Target by month 3: $5–10K MRR with most of it net profit.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============== CALCULATOR ============== -->
+<section class="section" id="calc">
+  <div class="card">
+    <h2>Concierge Pricing & Revenue Calculator</h2>
+    <p class="desc">Project your monthly revenue based on number of clients and price per client. Adjust on every "yes."</p>
+
+    <div class="calc">
+      <div>
+        <label>Number of concierge clients</label>
+        <input type="number" id="calc-clients" value="3" min="0" step="1" />
+      </div>
+      <div>
+        <label>Price per client ($/mo)</label>
+        <input type="number" id="calc-price" value="1500" min="0" step="100" />
+      </div>
+      <div>
+        <label>Paid assessments closed / month</label>
+        <input type="number" id="calc-paid" value="2" min="0" step="1" />
+      </div>
+      <div>
+        <label>Claude subscription ($/mo)</label>
+        <input type="number" id="calc-cost" value="20" min="0" step="1" />
+      </div>
+    </div>
+
+    <div class="grid cols-3" style="margin-top:14px">
+      <div class="kpi"><div><div class="num" id="kpi-mrr">$0</div><div class="lbl">MRR (Concierge)</div></div></div>
+      <div class="kpi"><div><div class="num" id="kpi-assess">$0</div><div class="lbl">Assessment revenue</div></div></div>
+      <div class="kpi"><div><div class="num" id="kpi-total">$0</div><div class="lbl">Total / month</div></div></div>
+      <div class="kpi"><div><div class="num" id="kpi-profit">$0</div><div class="lbl">Net profit</div></div></div>
+      <div class="kpi"><div><div class="num" id="kpi-margin">0%</div><div class="lbl">Margin</div></div></div>
+      <div class="kpi"><div><div class="num" id="kpi-yearly">$0</div><div class="lbl">Run-rate / yr</div></div></div>
+    </div>
+
+    <div class="resource" style="margin-top:14px">
+      <b>Heuristic:</b> Pricing starts at $1,000/mo and rises $300–$500 every time a new client says yes. The top of Corey's range so far is $2,000/mo per client with 5+ clients.
+    </div>
+  </div>
+</section>
+
+<!-- ============== RESOURCES ============== -->
+<section class="section" id="resources">
+  <div class="card">
+    <h2>Resources & Templates Mentioned</h2>
+    <p class="desc">Pull these together to operationalize the playbook.</p>
+
+    <div class="resource"><b>Off-the-shelf tool directories:</b> futurepedia.io · theresanaiforthat.com</div>
+    <div class="resource"><b>Most-prescribed tool:</b> SaneBox ($7/mo) — the go-to email pain-killer</div>
+    <div class="resource"><b>Recommended platforms:</b> Claude (projects + skills + Cowork) · Notion (client hub) · Jotform (intake) · Voxer (async comms) · Fathom (call recording + AI recap) · N8N or Zapier (automation)</div>
+    <div class="resource"><b>Automation skills to build:</b> intake-to-project-files · ai-concierge-call-update · ai-concierge-follow-up-email · ai-concierge-post-call (orchestrator)</div>
+    <div class="resource"><b>Notion client hub sections:</b> Quick links · Engagement overview · Open action items · Call log · Skills/tools built list</div>
+    <div class="resource"><b>Jotform intake fields:</b> Industry jargon · Time sinks · Goals/outcomes · Tool stack · Reference files · Focus areas · Anything else we should know?</div>
+    <div class="resource"><b>Free resources from Corey (linked in video description):</b> Mini Assessment Playbook · Top 8 Objections Playbook · AI Operator Academy community (aoa.com/community) — paid community with the full business-in-a-box</div>
+
+    <h3 style="margin-top:18px">My Notes</h3>
+    <p class="desc">Your notes save locally in this browser.</p>
+    <textarea id="notes" placeholder="Capture your wins, blockers, ideas, prices, client names..." style="width:100%;min-height:160px;background:var(--panel-2);border:1px solid var(--line);color:var(--ink);padding:12px;border-radius:10px;font-family:inherit;font-size:14px;resize:vertical"></textarea>
+    <div style="display:flex;gap:8px;margin-top:8px">
+      <button onclick="exportNotes()" style="background:var(--teal);color:#04221e;border:none;padding:8px 14px;border-radius:8px;font-weight:700;cursor:pointer">Download Notes</button>
+      <button onclick="clearNotes()" style="background:var(--panel-2);color:var(--muted);border:1px solid var(--line);padding:8px 14px;border-radius:8px;cursor:pointer">Clear Notes</button>
+    </div>
+  </div>
+</section>
+
+<div class="footer-note">
+  Source: "The ENTIRE AI Services Course A to Z" — Corey Gannon (YouTube). This is an interactive study plan / operating doc distilled from that video. Built for personal use. Check off tasks as you ship — progress is saved in this browser only.
+</div>
+
+</div>
+
+<div class="toast" id="toast">Copied to clipboard</div>
+
+<script>
+/* ---------- Tabs ---------- */
+const navButtons = document.querySelectorAll('#nav button');
+const sections = document.querySelectorAll('.section');
+navButtons.forEach(b=>b.addEventListener('click',()=>{
+  navButtons.forEach(x=>x.classList.remove('active'));
+  b.classList.add('active');
+  sections.forEach(s=>s.classList.remove('active'));
+  document.getElementById(b.dataset.tab).classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}));
+
+/* ---------- Copy buttons ---------- */
+const copyMap = {
+  text1:`Hey [Name], it's [You]. I've recently gotten deep into the world of AI and I've been researching tools that are helping business owners save time and make more money.
+
+I'd love to sit down with you for 15 minutes to get a feel for how your business runs, then show you one simple AI tool you can implement right away — completely free, no strings attached.
+
+Worst case, you'll learn something. Best case, I'll show you a tool that changes how you work. Interested?`,
+  text2:`If you could wave a magic wand and fix any one problem in your business, what would it be?`,
+  text3:`This is one tool you can implement yourself. I also offer a deeper $999 assessment where I prescribe 3–7 tools tailored to your entire business.
+
+Do you want to try this yourself, or would you like my help implementing it — and exploring what else I could find for you?`,
+  text4:`Great — these are the tools. But the real question is: do you want my help implementing them, and continuing to find and build new AI leverage in your business every single month? That's what my AI Concierge engagement is — [price] a month.`,
+  obj1:`Sure — and I could do my own taxes. I could write my own insurance. But I'm not a CPA, and I'm not an insurance agent. Wouldn't it make more sense to hire someone whose full-time job is staying on top of this stuff, rather than spending your own time and money figuring it out via trial and error?`,
+  obj2:`That's all the more reason. The whole point of AI is to make you money, save you time, and improve quality. You can't afford not to do this. Every day you wait, your competitors are pulling ahead. Let's at least do the free 15-minute assessment so you can see where the leverage is.`,
+  obj3:`I get it — it's a real decision. But every week you wait is another chunk of time spent doing things AI could be doing for you. The cost of getting started is small. The cost of doing nothing? Nothing changes — and your competitors keep moving.`
+};
+document.querySelectorAll('.copy').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const key = btn.dataset.copy;
+    const text = copyMap[key];
+    if(!text) return;
+    navigator.clipboard.writeText(text).then(()=>showToast('Copied to clipboard'));
+  });
+});
+
+/* ---------- Toast ---------- */
+const toast = document.getElementById('toast');
+let toastTimer;
+function showToast(msg){
+  toast.textContent = msg;
+  toast.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(()=>toast.classList.remove('show'),1500);
+}
+
+/* ---------- Persistent checkboxes ---------- */
+const STORAGE_KEY = 'ai-services-playbook-v1';
+const state = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+
+function bindChecklist(prefix, scope){
+  const inputs = document.querySelectorAll(`input[type=checkbox][id^="${prefix}"]`);
+  const total = inputs.length;
+  const label = document.getElementById(scope+'-progress-label');
+  const bar = document.getElementById(scope+'-progress');
+  function update(){
+    let done = 0;
+    inputs.forEach(i=>{
+      const id = i.id;
+      if(state[id]){
+        i.checked = true;
+        i.closest('.task').classList.add('done');
+        done++;
+      } else {
+        i.checked = false;
+        i.closest('.task').classList.remove('done');
+      }
+    });
+    label.textContent = `${done} / ${total}`;
+    bar.style.width = total ? `${(done/total)*100}%` : '0%';
+    updateRoad();
+  }
+  inputs.forEach(i=>{
+    i.addEventListener('change',()=>{
+      state[i.id] = i.checked;
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      update();
+    });
+  });
+  update();
+}
+
+function updateRoad(){
+  // Roadmap bar uses all w* ids
+  const all = document.querySelectorAll('input[type=checkbox][id^="w"]');
+  const total = all.length;
+  let done = 0;
+  all.forEach(i=>{ if(i.checked) done++; });
+  document.getElementById('road-progress-label').textContent = `${done} / ${total}`;
+  document.getElementById('road-progress').style.width = total ? `${(done/total)*100}%` : '0%';
+}
+
+bindChecklist('m','mini');
+bindChecklist('p','paid');
+bindChecklist('c','con');
+// Roadmap uses w* ids already counted in updateRoad; but still wire them so they save
+document.querySelectorAll('input[type=checkbox][id^="w"]').forEach(i=>{
+  if(state[i.id]){ i.checked = true; i.closest('.task').classList.add('done'); }
+  i.addEventListener('change',()=>{
+    state[i.id] = i.checked;
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    i.closest('.task').classList.toggle('done', i.checked);
+    updateRoad();
+  });
+});
+updateRoad();
+
+function resetRoad(){
+  if(!confirm('Reset all checkboxes?')) return;
+  Object.keys(state).forEach(k=>{ if(/^[mpcw]\d+$/.test(k)) delete state[k]; });
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  document.querySelectorAll('input[type=checkbox]').forEach(i=>{
+    i.checked = false;
+    i.closest('.task').classList.remove('done');
+  });
+  ['mini-progress-label','paid-progress-label','con-progress-label','road-progress-label'].forEach(id=>{
+    const inputs = id==='road-progress-label'
+      ? document.querySelectorAll('input[type=checkbox][id^="w"]')
+      : document.querySelectorAll(`input[type=checkbox][id^="${id.split('-')[0][0]}"]`);
+    document.getElementById(id).textContent = `0 / ${inputs.length}`;
+  });
+  document.querySelectorAll('.progress > div').forEach(b=>b.style.width='0%');
+  showToast('All checkboxes reset');
+}
+
+/* ---------- Calculator ---------- */
+const calcInputs = ['calc-clients','calc-price','calc-paid','calc-cost'].map(id=>document.getElementById(id));
+calcInputs.forEach(i=>i.addEventListener('input',updateCalc));
+function updateCalc(){
+  const clients = +document.getElementById('calc-clients').value || 0;
+  const price = +document.getElementById('calc-price').value || 0;
+  const paid = +document.getElementById('calc-paid').value || 0;
+  const cost = +document.getElementById('calc-cost').value || 0;
+  const mrr = clients * price;
+  const assess = paid * 999;
+  const total = mrr + assess;
+  const profit = total - cost;
+  const margin = total > 0 ? (profit/total)*100 : 0;
+  const fmt = n => '$' + n.toLocaleString();
+  document.getElementById('kpi-mrr').textContent = fmt(mrr);
+  document.getElementById('kpi-assess').textContent = fmt(assess);
+  document.getElementById('kpi-total').textContent = fmt(total);
+  document.getElementById('kpi-profit').textContent = fmt(profit);
+  document.getElementById('kpi-margin').textContent = margin.toFixed(1) + '%';
+  document.getElementById('kpi-yearly').textContent = fmt(total*12);
+}
+updateCalc();
+
+/* ---------- Notes ---------- */
+const notesEl = document.getElementById('notes');
+notesEl.value = state.notes || '';
+notesEl.addEventListener('input',()=>{
+  state.notes = notesEl.value;
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+});
+function exportNotes(){
+  const blob = new Blob([notesEl.value || ''], {type:'text/plain'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'ai-services-playbook-notes.txt';
+  a.click();
+  URL.revokeObjectURL(url);
+  showToast('Notes downloaded');
+}
+function clearNotes(){
+  if(!confirm('Clear all notes?')) return;
+  notesEl.value = '';
+  state.notes = '';
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  showToast('Notes cleared');
+}
+</script>
+</body>
+</html>
