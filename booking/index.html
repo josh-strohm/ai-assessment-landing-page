@@ -1058,6 +1058,13 @@
             color: var(--text-muted);
             font-weight: 600;
         }
+        /* Slightly more breathing room between "Best for:" text and the
+           button on the longer cards (AI Tools Assessment + AI Concierge) so
+           they read more like the shorter $99 Mini Assessment card. */
+        .option-card.featured .option-bestfor,
+        .option-card-concierge .option-bestfor {
+            padding-bottom: 20px;
+        }
 
         /* AI Concierge card — sits below the other two, centered, 1.5x the
            width of a single card in the 2-col grid above (50% → 75%). */
