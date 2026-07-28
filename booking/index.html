@@ -1057,8 +1057,21 @@
             color: var(--text-muted);
             font-weight: 600;
         }
+
+        /* AI Concierge card — sits below the other two, centered, 1.5x the
+           width of a single card in the 2-col grid above (50% → 75%). */
+        .concierge-wrapper {
+            max-width: 1000px;
+            margin: 24px auto 0;
+            display: flex;
+            justify-content: center;
+        }
+        .option-card-concierge {
+            width: 75%;
+        }
         @media (max-width: 800px) {
             .session-options { grid-template-columns: 1fr; }
+            .option-card-concierge { width: 100%; }
         }
     </style>
 </head>
@@ -1086,7 +1099,7 @@
             <div class="calendar-header">
                 <span class="calendar-section-tag">BOOK YOUR SESSION</span>
                 <h2 class="calendar-title">Pick a Time That Works for You</h2>
-                <p class="calendar-sub">Two ways to start. Pick the option that fits where your business is today. Both sessions run on Google Meet.</p>
+                <p class="calendar-sub">Three ways to start. Pick the option that fits where your business is today. Sessions run on Google Meet.</p>
             </div>
 
             <div class="session-options">
@@ -1122,6 +1135,26 @@
                     </a>
                 </div>
             </div>
+
+            <div class="concierge-wrapper">
+                <div class="option-card option-card-concierge">
+                    <div class="option-eyebrow">RECURRING &middot; $1K+/MO</div>
+                    <h3 class="option-title">AI Concierge</h3>
+                    <p class="option-tagline">Your fractional AI partner &mdash; bi-weekly strategy calls, custom tools, ongoing implementation.</p>
+                    <ul class="option-list">
+                        <li>Bi-weekly 90-minute strategy calls to find new AI leverage</li>
+                        <li>A dedicated Claude project with full context on your business</li>
+                        <li>A Notion hub tracking every call, action item, and tool built</li>
+                        <li>Custom skills and automations shipped after each call</li>
+                        <li>Async Voxer access between calls for quick questions</li>
+                    </ul>
+                    <p class="option-bestfor"><strong>Best for:</strong> business owners who want ongoing AI leverage compounding month over month &mdash; without doing the research or building themselves.</p>
+                    <a href="https://cal.com/josh-strohm/ai-concierge" class="btn btn-primary" style="margin-top: auto; display: flex; justify-content: center; width: 100%;">
+                        Book Now!
+                    </a>
+                </div>
+            </div>
+
             <div class="calendar-back">
                 <a href="../index.html">&larr; Back to overview</a>
             </div>
