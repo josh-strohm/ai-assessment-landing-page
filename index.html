@@ -45,13 +45,18 @@
             <a href="#" class="logo">
                 <span class="logo-js">AI Tools Assessment</span>
             </a>
-            <div class="nav-links">
+            <div class="nav-links" id="nav-links">
                 <a href="#offer">The Offer</a>
                 <a href="#how">How It Works</a>
                 <a href="#guarantee">Guarantee</a>
                 <a href="#faq">FAQ</a>
                 <a href="booking/" class="nav-cta">Book Assessment</a>
             </div>
+            <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Open menu">
+                <span class="nav-toggle-bar"></span>
+                <span class="nav-toggle-bar"></span>
+                <span class="nav-toggle-bar"></span>
+            </button>
         </div>
     </nav>
 
@@ -480,6 +485,31 @@
             else nav.classList.remove('scrolled');
         }, { passive: true });
 
+        // Mobile menu toggle
+        const navToggle = document.querySelector('.nav-toggle');
+        if (navToggle) {
+            const setOpen = (open) => {
+                nav.classList.toggle('nav-open', open);
+                navToggle.setAttribute('aria-expanded', String(open));
+                navToggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+            };
+            navToggle.addEventListener('click', () => {
+                setOpen(!nav.classList.contains('nav-open'));
+            });
+            nav.querySelectorAll('.nav-links a').forEach(link => {
+                link.addEventListener('click', () => setOpen(false));
+            });
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && nav.classList.contains('nav-open')) {
+                    setOpen(false);
+                    navToggle.focus();
+                }
+            });
+            // Close menu if viewport widens past the breakpoint
+            const mql = window.matchMedia('(min-width: 901px)');
+            mql.addEventListener('change', (e) => { if (e.matches) setOpen(false); });
+        }
+
         // Reveal on scroll
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -493,22 +523,54 @@
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
         // FAQ accordion
+        function closePanel(panel) {
+            if (!panel) return;
+            if (panel._faqOnEnd) {
+                panel.removeEventListener('transitionend', panel._faqOnEnd);
+                panel._faqOnEnd = null;
+            }
+            panel.style.maxHeight = panel.scrollHeight + 'px';
+            panel.offsetHeight;
+            panel.style.maxHeight = '0px';
+        }
+        function openPanel(panel) {
+            if (!panel) return;
+            if (panel._faqOnEnd) {
+                panel.removeEventListener('transitionend', panel._faqOnEnd);
+            }
+            panel.style.maxHeight = panel.scrollHeight + 'px';
+            const onEnd = (e) => {
+                if (e.propertyName !== 'max-height') return;
+                panel.style.maxHeight = 'none';
+                panel.removeEventListener('transitionend', onEnd);
+                panel._faqOnEnd = null;
+            };
+            panel.addEventListener('transitionend', onEnd);
+            panel._faqOnEnd = onEnd;
+        }
+
         document.querySelectorAll('.faq-item').forEach(item => {
+            const panel = item.querySelector('.faq-a');
             item.addEventListener('click', () => {
                 const isOpen = item.classList.contains('open');
                 document.querySelectorAll('.faq-item').forEach(i => {
                     i.classList.remove('open');
                     const btn = i.querySelector('.faq-q');
-                    const panel = i.querySelector('.faq-a');
+                    const p = i.querySelector('.faq-a');
                     if (btn) { btn.setAttribute('aria-expanded', 'false'); }
-                    if (panel) { panel.setAttribute('aria-hidden', 'true'); }
+                    if (p) {
+                        p.setAttribute('aria-hidden', 'true');
+                        closePanel(p);
+                    }
                 });
                 if (!isOpen) {
                     item.classList.add('open');
                     const btn = item.querySelector('.faq-q');
-                    const panel = item.querySelector('.faq-a');
                     if (btn) { btn.setAttribute('aria-expanded', 'true'); }
-                    if (panel) { panel.setAttribute('aria-hidden', 'false'); }
+                    if (panel) {
+                        panel.setAttribute('aria-hidden', 'false');
+                        openPanel(panel);
+                    }
                 }
             });
             item.addEventListener('keydown', (e) => {
