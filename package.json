@@ -6,13 +6,11 @@
     "build": "npm run minify:html && npm run minify:css && npm run minify:js",
     "minify:html": "html-minifier-terser --input-dir . --output-dir dist --file-ext html --collapse-whitespace --remove-comments --remove-redundant-attributes --remove-script-type-attributes --remove-style-link-type-attributes --use-short-doctype --minify-css true --minify-js true",
     "minify:css": "cleancss -o dist/styles.css styles.css",
-    "minify:js": "terser favicon.js -o dist/favicon.js -c -m",
-    "optimize:images": "node scripts/optimize-images.mjs"
+    "minify:js": "terser favicon.js -o dist/favicon.js -c -m"
   },
   "devDependencies": {
     "html-minifier-terser": "^7.2.0",
     "clean-css-cli": "^5.6.3",
-    "terser": "^5.37.0",
-    "sharp": "^0.33.5"
+    "terser": "^5.37.0"
   }
 }
