@@ -3,10 +3,11 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "build": "npm run minify:html && npm run minify:css && npm run minify:js",
-    "minify:html": "html-minifier-terser --input-dir . --output-dir dist --file-ext html --collapse-whitespace --remove-comments --remove-redundant-attributes --remove-script-type-attributes --remove-style-link-type-attributes --use-short-doctype --minify-css true --minify-js true",
+    "build": "npm run minify:html && npm run minify:css && npm run minify:js && npm run copy:assets",
+    "minify:html": "node scripts/minify-html.js",
     "minify:css": "cleancss -o dist/styles.css styles.css",
-    "minify:js": "terser favicon.js -o dist/favicon.js -c -m"
+    "minify:js": "terser favicon.js -o dist/favicon.js -c -m",
+    "copy:assets": "node scripts/copy-assets.js"
   },
   "devDependencies": {
     "html-minifier-terser": "^7.2.0",

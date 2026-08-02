@@ -413,7 +413,7 @@
                 <div class="upsell-card featured">
                     <div class="upsell-name">⭐ AI Concierge</div>
                     <div class="upsell-price">$1,000/month</div>
-                    <p>Two 45-minute working sessions per month. We build AI skills together, live. Unlimited async access between calls. We look at every workflow, tighten it up, and automate what's worth automating.</p>
+                    <p>One 30-minute setup call, then two bi-weekly 60-minute strategy calls per month. We build AI skills together, live. Unlimited async access between calls. We look at every workflow, tighten it up, and automate what's worth automating.</p>
                 </div>
             </div>
         </div>
@@ -511,17 +511,21 @@
             mql.addEventListener('change', (e) => { if (e.matches) setOpen(false); });
         }
 
-        // Reveal on scroll
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.1, rootMargin: '0px 0px -80px 0px' });
-
-        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+        // Reveal on scroll, with a visible fallback for browsers without IntersectionObserver.
+        const revealElements = document.querySelectorAll('.reveal');
+        if ('IntersectionObserver' in window) {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1, rootMargin: '0px 0px -80px 0px' });
+            revealElements.forEach(el => observer.observe(el));
+        } else {
+            revealElements.forEach(el => el.classList.add('visible'));
+        }
 
         // FAQ accordion
         function closePanel(panel) {
@@ -552,7 +556,8 @@
 
         document.querySelectorAll('.faq-item').forEach(item => {
             const panel = item.querySelector('.faq-a');
-            item.addEventListener('click', () => {
+            const question = item.querySelector('.faq-q');
+            const toggle = () => {
                 const isOpen = item.classList.contains('open');
                 document.querySelectorAll('.faq-item').forEach(i => {
                     i.classList.remove('open');
@@ -573,13 +578,16 @@
                         openPanel(panel);
                     }
                 }
-            });
-            item.addEventListener('keydown', (e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault();
-                    item.click();
-                }
-            });
+            };
+            if (question) {
+                question.addEventListener('click', toggle);
+                question.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        toggle();
+                    }
+                });
+            }
         });
     </script>
 </body>

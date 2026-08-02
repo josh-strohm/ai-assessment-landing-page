@@ -741,9 +741,35 @@ document.querySelectorAll('.copy').forEach(btn=>{
     const key = btn.dataset.copy;
     const text = copyMap[key];
     if(!text) return;
-    navigator.clipboard.writeText(text).then(()=>showToast('Copied to clipboard'));
+    copyText(text)
+      .then(()=>showToast('Copied to clipboard'))
+      .catch(()=>showToast('Copy failed — select the text manually'));
   });
 });
+
+function copyText(text){
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    return navigator.clipboard.writeText(text);
+  }
+
+  return new Promise((resolve, reject)=>{
+    const textarea = document.createElement('textarea');
+    textarea.value = text;
+    textarea.setAttribute('readonly', '');
+    textarea.style.position = 'fixed';
+    textarea.style.opacity = '0';
+    document.body.appendChild(textarea);
+    textarea.select();
+    try {
+      if (!document.execCommand('copy')) throw new Error('Copy command failed');
+      resolve();
+    } catch (error) {
+      reject(error);
+    } finally {
+      textarea.parentNode.removeChild(textarea);
+    }
+  });
+}
 
 /* ---------- Toast ---------- */
 const toast = document.getElementById('toast');
@@ -757,7 +783,23 @@ function showToast(msg){
 
 /* ---------- Persistent checkboxes ---------- */
 const STORAGE_KEY = 'ai-services-playbook-v1';
-const state = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+function readState(){
+  try {
+    const stored = localStorage.getItem(STORAGE_KEY);
+    const parsed = stored ? JSON.parse(stored) : {};
+    return parsed && typeof parsed === 'object' && !Array.isArray(parsed) ? parsed : {};
+  } catch (error) {
+    return {};
+  }
+}
+function saveState(){
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  } catch (error) {
+    showToast('Progress could not be saved in this browser');
+  }
+}
+const state = readState();
 
 function bindChecklist(prefix, scope){
   const inputs = document.querySelectorAll(`input[type=checkbox][id^="${prefix}"]`);
@@ -784,7 +826,7 @@ function bindChecklist(prefix, scope){
   inputs.forEach(i=>{
     i.addEventListener('change',()=>{
       state[i.id] = i.checked;
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      saveState();
       update();
     });
   });
@@ -809,7 +851,7 @@ document.querySelectorAll('input[type=checkbox][id^="w"]').forEach(i=>{
   if(state[i.id]){ i.checked = true; i.closest('.task').classList.add('done'); }
   i.addEventListener('change',()=>{
     state[i.id] = i.checked;
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    saveState();
     i.closest('.task').classList.toggle('done', i.checked);
     updateRoad();
   });
@@ -819,7 +861,7 @@ updateRoad();
 function resetRoad(){
   if(!confirm('Reset all checkboxes?')) return;
   Object.keys(state).forEach(k=>{ if(/^[mpcw]\d+$/.test(k)) delete state[k]; });
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  saveState();
   document.querySelectorAll('input[type=checkbox]').forEach(i=>{
     i.checked = false;
     i.closest('.task').classList.remove('done');
@@ -838,10 +880,16 @@ function resetRoad(){
 const calcInputs = ['calc-clients','calc-price','calc-paid','calc-cost'].map(id=>document.getElementById(id));
 calcInputs.forEach(i=>i.addEventListener('input',updateCalc));
 function updateCalc(){
-  const clients = +document.getElementById('calc-clients').value || 0;
-  const price = +document.getElementById('calc-price').value || 0;
-  const paid = +document.getElementById('calc-paid').value || 0;
-  const cost = +document.getElementById('calc-cost').value || 0;
+  const readNonNegative = (id, integer = false) => {
+    const value = Number(document.getElementById(id).value);
+    if (!Number.isFinite(value)) return 0;
+    const normalized = Math.max(0, value);
+    return integer ? Math.floor(normalized) : normalized;
+  };
+  const clients = readNonNegative('calc-clients', true);
+  const price = readNonNegative('calc-price');
+  const paid = readNonNegative('calc-paid', true);
+  const cost = readNonNegative('calc-cost');
   const mrr = clients * price;
   const assess = paid * 999;
   const total = mrr + assess;
@@ -862,7 +910,7 @@ const notesEl = document.getElementById('notes');
 notesEl.value = state.notes || '';
 notesEl.addEventListener('input',()=>{
   state.notes = notesEl.value;
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  saveState();
 });
 function exportNotes(){
   const blob = new Blob([notesEl.value || ''], {type:'text/plain'});
@@ -878,7 +926,7 @@ function clearNotes(){
   if(!confirm('Clear all notes?')) return;
   notesEl.value = '';
   state.notes = '';
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  saveState();
   showToast('Notes cleared');
 }
 </script>
